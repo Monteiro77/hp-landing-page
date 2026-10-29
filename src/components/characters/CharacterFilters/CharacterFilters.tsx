@@ -19,7 +19,7 @@ const HOUSE_OPTIONS: Array<{ value: HouseFilter; label: string }> = [
 ]
 
 const STATUS_OPTIONS: Array<{ value: StatusFilter; label: string }> = [
-  { value: 'all', label: 'Todos os status' },
+  { value: 'all', label: 'Status: todos' },
   { value: 'alive', label: 'Vivos' },
   { value: 'deceased', label: 'Falecidos' },
 ]
@@ -56,7 +56,7 @@ export function CharacterFilters({ filters, onChange, onReset }: CharacterFilter
             id={`${id}-query`}
             type="search"
             className={styles.searchInput}
-            placeholder="Buscar por personagem ou ator..."
+            placeholder="Buscar por nome ou ator"
             autoComplete="off"
             spellCheck={false}
             maxLength={80}

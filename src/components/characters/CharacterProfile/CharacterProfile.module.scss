@@ -17,7 +17,8 @@
 
 // Mesmo quadro em arco do hero: o elemento-assinatura do site.
 .frame {
-  width: min(100%, 22rem);
+  // Menor no mobile para o nome aparecer sem rolar.
+  width: min(100%, 16rem);
   margin-inline: auto;
   overflow: hidden;
   border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
@@ -28,6 +29,7 @@
     0 32px 64px -28px var(--house-primary);
 
   @include up(md) {
+    width: min(100%, 22rem);
     position: sticky;
     top: calc(var(--header-height) + var(--space-8));
   }
