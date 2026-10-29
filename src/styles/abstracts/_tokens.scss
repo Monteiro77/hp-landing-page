@@ -7,33 +7,39 @@ $breakpoints: (
 );
 
 // Cores das casas.
-// - primary: cor do brasão, usada em fundos e degradês.
+// - primary: cor do brasão, usada em fundos e degradês (igual nos dois temas, como uma pintura).
 // - accent: metal do brasão (ouro, prata, bronze...).
-// - ink: versão legível sobre o fundo escuro, usada em textos e bordas.
+// - ink-light / ink-dark: versão para texto, com contraste mínimo de 6:1 sobre a superfície
+//   do tema correspondente (#ffffff no claro, #151a2a no escuro).
 $houses: (
   gryffindor: (
     primary: #7a1015,
     accent: #d3a625,
-    ink: #f0796b,
+    ink-light: #a3171c,
+    ink-dark: #f0796b,
   ),
   slytherin: (
     primary: #1a472a,
     accent: #b9bec4,
-    ink: #63c98d,
+    ink-light: #1d6b3a,
+    ink-dark: #63c98d,
   ),
   hufflepuff: (
     primary: #7a5c0c,
     accent: #ecb939,
-    ink: #f2cb5a,
+    ink-light: #7f5c00,
+    ink-dark: #f2cb5a,
   ),
   ravenclaw: (
     primary: #1b2a5c,
     accent: #b07f45,
-    ink: #8ea7f7,
+    ink-light: #2b3f91,
+    ink-dark: #8ea7f7,
   ),
   none: (
     primary: #2b3045,
-    accent: #8b90a6,
-    ink: #b8bccc,
+    accent: #a9aec2,
+    ink-light: #5b6075,
+    ink-dark: #b8bccc,
   ),
 );

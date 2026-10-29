@@ -6,8 +6,13 @@
   z-index: 50;
   height: var(--header-height);
   border-bottom: 1px solid var(--color-border);
-  background: rgb(9 11 19 / 0.78);
+  // Material translúcido apenas na camada de navegação, nunca no conteúdo.
+  background: var(--color-header);
   backdrop-filter: blur(14px) saturate(140%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    backdrop-filter: none;
+  }
 }
 
 .inner {
@@ -23,7 +28,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-gold);
+  color: var(--color-accent);
   border-radius: var(--radius-sm);
 }
 
@@ -69,22 +74,24 @@
 .iconLink {
   display: inline-flex;
   align-items: center;
-  min-height: 2.5rem;
+  min-height: var(--control-height);
   padding-inline: var(--space-3);
   border-radius: var(--radius-pill);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   transition:
     color var(--duration) var(--ease-out),
     background-color var(--duration) var(--ease-out);
 
   @include hover {
     color: var(--color-text);
-    background: rgb(255 255 255 / 0.06);
+    background: var(--color-fill-hover);
   }
 }
 
 .iconLink {
-  padding-inline: var(--space-2);
+  justify-content: center;
+  min-width: var(--control-height);
+  padding-inline: 0;
 }

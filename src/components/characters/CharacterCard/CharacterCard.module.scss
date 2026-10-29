@@ -9,8 +9,9 @@
   height: 100%;
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  // Sem deslocamento no hover: a grade é percorrida o tempo todo, então o retorno é só de borda
+  // e sombra, sem movimento.
   transition:
-    transform var(--duration) var(--ease-out),
     border-color var(--duration) var(--ease-out),
     box-shadow var(--duration) var(--ease-out);
 
@@ -30,24 +31,15 @@
   }
 
   @include hover {
-    transform: translateY(-4px);
-    border-color: var(--color-border-strong);
+    border-color: var(--house-ink);
     box-shadow:
       var(--shadow-card),
-      0 0 0 1px rgb(226 189 114 / 0.08),
       0 24px 48px -24px var(--house-primary);
   }
 
-  &:focus-within {
-    border-color: var(--color-gold);
-  }
-
-  @include reduced-motion {
-    transition: none;
-
-    &:hover {
-      transform: none;
-    }
+  // O foco do link "esticado" é exibido no card inteiro.
+  &:has(.link:focus-visible) {
+    @include focus-ring;
   }
 }
 
@@ -91,7 +83,9 @@
 
 .name {
   font-size: var(--text-lg);
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .link {
@@ -104,7 +98,6 @@
     z-index: 2;
   }
 
-  // O destaque de foco fica no card inteiro (:focus-within).
   &:focus-visible {
     outline: none;
   }
@@ -123,11 +116,7 @@
   gap: 0.125rem;
 
   dt {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
+    @include data-label;
   }
 
   dd {
@@ -138,7 +127,6 @@
 }
 
 .detail .unknown {
-  font-style: italic;
   font-weight: 400;
-  color: rgb(170 165 152 / 0.75);
+  color: var(--color-text-tertiary);
 }

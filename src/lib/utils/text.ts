@@ -18,6 +18,13 @@ export function getInitials(name: string): string {
   return (first + last).toUpperCase()
 }
 
+const countFormatter = new Intl.NumberFormat('pt-BR')
+
+/** pluralize(2, 'personagem', 'personagens') -> "2 personagens". */
+export function pluralize(count: number, singular: string, plural: string): string {
+  return `${countFormatter.format(count)} ${count === 1 ? singular : plural}`
+}
+
 /** Junta classes CSS ignorando valores falsos. */
 export function cn(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(' ')

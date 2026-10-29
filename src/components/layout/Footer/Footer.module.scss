@@ -20,30 +20,21 @@
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--color-gold);
-}
-
-.logo {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
 .content {
   display: grid;
   gap: var(--space-2);
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 
   a {
-    color: var(--color-gold);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 0.2em;
-    text-decoration-color: rgb(226 189 114 / 0.4);
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
 
     @include hover {
       text-decoration-color: currentColor;

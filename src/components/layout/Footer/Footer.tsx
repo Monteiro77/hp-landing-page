@@ -1,4 +1,3 @@
-import { LogoMark } from '@/components/ui/LogoMark'
 import { SITE } from '@/constants/site'
 import styles from './Footer.module.scss'
 
@@ -6,10 +5,7 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <div className={styles.brand}>
-          <LogoMark className={styles.logo} />
-          <span>{SITE.name}</span>
-        </div>
+        <p className={styles.brand}>{SITE.name}</p>
 
         <div className={styles.content}>
           <p>

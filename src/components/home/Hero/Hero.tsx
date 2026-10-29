@@ -1,11 +1,9 @@
 import { CharacterPortrait } from '@/components/characters/CharacterPortrait'
 import { Icon } from '@/components/ui/Icon'
-import { HOUSE_IDS } from '@/constants/houses'
 import type { CharacterStats } from '@/lib/characters/stats'
+import { pluralize } from '@/lib/utils/text'
 import type { CharacterSummary } from '@/types/character'
 import styles from './Hero.module.scss'
-
-const numberFormatter = new Intl.NumberFormat('pt-BR')
 
 interface HeroProps {
   stats: CharacterStats
@@ -14,11 +12,10 @@ interface HeroProps {
 }
 
 export function Hero({ stats, featured }: HeroProps) {
-  const highlights = [
-    { value: stats.total, label: 'personagens catalogados' },
-    { value: HOUSE_IDS.length, label: 'casas de Hogwarts' },
-    { value: stats.alive, label: 'ainda vivos' },
-    { value: stats.actors, label: 'atores e atrizes' },
+  const facts = [
+    pluralize(stats.total, 'personagem', 'personagens'),
+    `${pluralize(stats.alive, 'vivo', 'vivos')} até o fim da saga`,
+    pluralize(stats.actors, 'ator ou atriz', 'atores e atrizes'),
   ]
 
   return (
@@ -30,12 +27,11 @@ export function Hero({ stats, featured }: HeroProps) {
             Guia do universo Harry Potter
           </p>
           <h1 id="hero-title" className={styles.title}>
-            Bruxos, trouxas e criaturas de <span className={styles.highlight}>Hogwarts</span> em um
-            só lugar
+            Bruxos, trouxas e criaturas de Hogwarts em um só lugar
           </h1>
           <p className={styles.lead}>
             Descubra a casa, o patrono, a data de nascimento e quem interpretou cada personagem da
-            saga. E confira quem sobreviveu até o fim.
+            saga.
           </p>
           <div className={styles.actions}>
             <a href="#personagens" className={styles.primaryAction}>
@@ -46,6 +42,17 @@ export function Hero({ stats, featured }: HeroProps) {
               Conhecer as casas
             </a>
           </div>
+
+          <ul className={styles.facts} aria-label="A coleção em números">
+            {facts.map((fact) => {
+              const [count, ...rest] = fact.split(' ')
+              return (
+                <li key={fact}>
+                  <strong>{count}</strong> {rest.join(' ')}
+                </li>
+              )
+            })}
+          </ul>
         </div>
 
         <div className={styles.gallery} aria-hidden="true">
@@ -63,15 +70,6 @@ export function Hero({ stats, featured }: HeroProps) {
           ))}
         </div>
       </div>
-
-      <dl className={styles.stats}>
-        {highlights.map((item) => (
-          <div key={item.label} className={styles.stat}>
-            <dt className={styles.statLabel}>{item.label}</dt>
-            <dd className={styles.statValue}>{numberFormatter.format(item.value)}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   )
 }

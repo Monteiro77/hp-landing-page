@@ -34,31 +34,24 @@
   background:
     radial-gradient(
       120% 70% at 0% 0%,
-      color-mix(in srgb, var(--house-primary) 55%, transparent),
+      color-mix(in srgb, var(--house-primary) var(--house-wash), transparent),
       transparent 70%
     ),
     var(--color-surface);
+  box-shadow: var(--shadow-card);
   transition:
-    transform var(--duration) var(--ease-out),
     border-color var(--duration) var(--ease-out),
     box-shadow var(--duration) var(--ease-out);
 
   @include hover {
-    transform: translateY(-4px);
     border-color: var(--house-ink);
-    box-shadow: 0 24px 48px -24px var(--house-primary);
+    box-shadow:
+      var(--shadow-card),
+      0 24px 48px -24px var(--house-primary);
   }
 
-  &:focus-within {
-    border-color: var(--color-gold);
-  }
-
-  @include reduced-motion {
-    transition: none;
-
-    &:hover {
-      transform: none;
-    }
+  &:has(.link:focus-visible) {
+    @include focus-ring;
   }
 }
 
@@ -66,10 +59,11 @@
   width: 3.5rem;
   height: auto;
   margin-bottom: var(--space-2);
-  filter: drop-shadow(0 8px 16px rgb(0 0 0 / 0.5));
+  filter: drop-shadow(0 6px 12px rgb(0 0 0 / 0.3));
 }
 
 .name {
+  font-family: var(--font-display);
   font-size: var(--text-xl);
 }
 
@@ -88,7 +82,7 @@
 
 .founder {
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .traits {
@@ -114,10 +108,7 @@
   font-size: var(--text-sm);
 
   dt {
-    font-size: 0.6875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
+    @include data-label;
   }
 
   dd {
@@ -137,7 +128,7 @@
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .cta {
