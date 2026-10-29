@@ -1,0 +1,1 @@
+export { HouseTag } from './HouseTag'

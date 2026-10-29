@@ -21,7 +21,7 @@ export function Header() {
         <nav aria-label="Navegação principal">
           <ul className={styles.nav}>
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className={styles.anchorItem}>
                 <Link href={link.href} className={styles.navLink}>
                   {link.label}
                 </Link>

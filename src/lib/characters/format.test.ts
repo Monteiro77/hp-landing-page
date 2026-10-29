@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { PATRONUS_LABELS } from '@/constants/labels'
-import { formatBirthDate, formatHouse, formatWandLength, translate } from './format'
+import { formatBirthDate, formatHouse, formatStatus, formatWandLength, translate } from './format'
 
 describe('formatBirthDate', () => {
   it('formata a data completa em português', () => {
@@ -13,6 +13,15 @@ describe('formatBirthDate', () => {
 
   it('retorna null sem data nem ano', () => {
     expect(formatBirthDate(null, null)).toBeNull()
+  })
+})
+
+describe('formatStatus', () => {
+  it('concorda com o gênero', () => {
+    expect(formatStatus(true, 'female')).toBe('Viva')
+    expect(formatStatus(false, 'female')).toBe('Falecida')
+    expect(formatStatus(true, 'male')).toBe('Vivo')
+    expect(formatStatus(false, null)).toBe('Falecido')
   })
 })
 

@@ -48,6 +48,6 @@ export function mapApiCharacter(api: ApiCharacter): Character {
 }
 
 export function toCharacterSummary(character: Character): CharacterSummary {
-  const { id, name, image, house, birthDate, birthYear, patronus, actor, alive } = character
-  return { id, name, image, house, birthDate, birthYear, patronus, actor, alive }
+  const { id, name, image, house, birthDate, birthYear, patronus, actor, alive, gender } = character
+  return { id, name, image, house, birthDate, birthYear, patronus, actor, alive, gender }
 }

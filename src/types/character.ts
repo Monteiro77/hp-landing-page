@@ -33,5 +33,14 @@ export interface Character {
 /** Versão enxuta enviada ao navegador na listagem, para reduzir o payload. */
 export type CharacterSummary = Pick<
   Character,
-  'id' | 'name' | 'image' | 'house' | 'birthDate' | 'birthYear' | 'patronus' | 'actor' | 'alive'
+  | 'id'
+  | 'name'
+  | 'image'
+  | 'house'
+  | 'birthDate'
+  | 'birthYear'
+  | 'patronus'
+  | 'actor'
+  | 'alive'
+  | 'gender'
 >

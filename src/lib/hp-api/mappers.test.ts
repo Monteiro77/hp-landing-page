@@ -90,6 +90,7 @@ describe('toCharacterSummary', () => {
         'alive',
         'birthDate',
         'birthYear',
+        'gender',
         'house',
         'id',
         'image',

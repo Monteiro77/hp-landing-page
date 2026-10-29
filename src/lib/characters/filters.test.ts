@@ -19,6 +19,7 @@ function buildCharacter(overrides: Partial<CharacterSummary>): CharacterSummary 
     patronus: null,
     actor: null,
     alive: true,
+    gender: null,
     ...overrides,
   }
 }

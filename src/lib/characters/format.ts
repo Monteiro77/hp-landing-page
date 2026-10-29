@@ -20,6 +20,13 @@ export function formatBirthDate(birthDate: string | null, birthYear: number | nu
   return birthYear ? String(birthYear) : null
 }
 
+/** Concorda com o gênero do personagem: "Viva", "Falecido"... */
+export function formatStatus(alive: boolean, gender: string | null): string {
+  const isFemale = gender === 'female'
+  if (alive) return isFemale ? 'Viva' : 'Vivo'
+  return isFemale ? 'Falecida' : 'Falecido'
+}
+
 export function formatHouse(house: HouseId | null): string {
   return house ? HOUSES[house].name : 'Sem casa'
 }

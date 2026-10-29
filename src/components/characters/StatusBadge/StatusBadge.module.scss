@@ -1,0 +1,33 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.25em 0.7em;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  background: rgb(9 11 19 / 0.82);
+  backdrop-filter: blur(6px);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.alive {
+  color: var(--color-alive);
+
+  .dot {
+    box-shadow: 0 0 0 3px rgb(111 211 155 / 0.2);
+  }
+}
+
+.deceased {
+  color: var(--color-deceased);
+}

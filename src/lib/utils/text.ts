@@ -8,6 +8,21 @@ export function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
+/** Iniciais do primeiro e do último nome: "Harry James Potter" -> "HP". */
+export function getInitials(name: string): string {
+  const words = name.trim().split(/\s+/).filter(Boolean)
+  if (words.length === 0) return '?'
+
+  const first = words[0].charAt(0)
+  const last = words.length > 1 ? words[words.length - 1].charAt(0) : ''
+  return (first + last).toUpperCase()
+}
+
+/** Junta classes CSS ignorando valores falsos. */
+export function cn(...classes: Array<string | false | null | undefined>): string {
+  return classes.filter(Boolean).join(' ')
+}
+
 /** Normaliza texto para busca: minúsculas e sem acentos ("Grifinória" -> "grifinoria"). */
 export function normalizeForSearch(value: string): string {
   return value

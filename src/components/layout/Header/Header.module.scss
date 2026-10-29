@@ -38,6 +38,7 @@
   font-size: var(--text-base);
   font-weight: 700;
   letter-spacing: 0.04em;
+  white-space: nowrap;
   color: var(--color-text);
 
   @include up(sm) {
@@ -54,6 +55,13 @@
 
   @include up(sm) {
     gap: var(--space-2);
+  }
+}
+
+// Em telas estreitas os atalhos de âncora saem para o nome do site caber em uma linha.
+.anchorItem {
+  @include down(sm) {
+    display: none;
   }
 }
 

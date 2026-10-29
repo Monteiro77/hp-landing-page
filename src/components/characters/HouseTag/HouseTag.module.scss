@@ -1,0 +1,19 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--house-ink);
+}
+
+.swatch {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--house-primary) 50%, var(--house-accent) 50%);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.15);
+  transform: rotate(45deg);
+}
