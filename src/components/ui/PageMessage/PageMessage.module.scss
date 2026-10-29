@@ -1,0 +1,29 @@
+@use 'abstracts' as *;
+
+.message {
+  @include container;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  max-width: 40rem;
+  padding-top: var(--section-spacing);
+  text-align: center;
+}
+
+.eyebrow {
+  @include eyebrow;
+}
+
+.title {
+  font-size: var(--text-2xl);
+}
+
+.description {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+.action {
+  @include button(primary);
+  margin-top: var(--space-4);
+}

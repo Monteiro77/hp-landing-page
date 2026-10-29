@@ -1,0 +1,132 @@
+@use 'abstracts' as *;
+
+.profile {
+  display: grid;
+  gap: var(--space-10);
+  align-items: start;
+
+  @include up(md) {
+    grid-template-columns: minmax(16rem, 22rem) 1fr;
+    gap: var(--space-12);
+  }
+
+  @include up(lg) {
+    gap: var(--space-16);
+  }
+}
+
+// Mesmo quadro em arco do hero: o elemento-assinatura do site.
+.frame {
+  width: min(100%, 22rem);
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  box-shadow:
+    0 0 0 1px var(--color-border-strong),
+    0 0 0 6px var(--color-bg),
+    0 0 0 7px color-mix(in srgb, var(--color-accent) 35%, transparent),
+    0 32px 64px -28px var(--house-primary);
+
+  @include up(md) {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-8));
+  }
+}
+
+.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.content {
+  display: grid;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.header {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+}
+
+.name {
+  font-size: var(--text-3xl);
+}
+
+.aliases {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.role {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25em 0.7em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.details {
+  @include surface;
+  display: grid;
+  padding: var(--space-2) var(--space-5);
+
+  @include up(sm) {
+    padding: var(--space-2) var(--space-6);
+  }
+}
+
+.detail {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+
+  & + & {
+    border-top: 1px solid var(--color-border);
+  }
+
+  @include up(sm) {
+    grid-template-columns: 10rem 1fr;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  dt {
+    @include data-label;
+  }
+
+  dd {
+    font-weight: 500;
+  }
+}
+
+// Skeleton
+
+.skeleton {
+  background: var(--color-fill);
+}
+
+.skeletonLine {
+  display: block;
+  height: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-fill-hover);
+}
+
+.detail .unknown {
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+}
