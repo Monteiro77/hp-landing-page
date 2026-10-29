@@ -1,0 +1,82 @@
+@use 'abstracts' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(9 11 19 / 0.78);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.inner {
+  @include container;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-gold);
+  border-radius: var(--radius-sm);
+}
+
+.logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+
+  @include up(sm) {
+    font-size: var(--text-lg);
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0;
+  list-style: none;
+
+  @include up(sm) {
+    gap: var(--space-2);
+  }
+}
+
+.navLink,
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration) var(--ease-out),
+    background-color var(--duration) var(--ease-out);
+
+  @include hover {
+    color: var(--color-text);
+    background: rgb(255 255 255 / 0.06);
+  }
+}
+
+.iconLink {
+  padding-inline: var(--space-2);
+}

@@ -24,8 +24,18 @@ function buildCharacter(overrides: Partial<CharacterSummary>): CharacterSummary 
 }
 
 const characters: CharacterSummary[] = [
-  buildCharacter({ name: 'Harry Potter', house: 'gryffindor', actor: 'Daniel Radcliffe', image: 'h.jpg' }),
-  buildCharacter({ name: 'Severus Snape', house: 'slytherin', actor: 'Alan Rickman', alive: false }),
+  buildCharacter({
+    name: 'Harry Potter',
+    house: 'gryffindor',
+    actor: 'Daniel Radcliffe',
+    image: 'h.jpg',
+  }),
+  buildCharacter({
+    name: 'Severus Snape',
+    house: 'slytherin',
+    actor: 'Alan Rickman',
+    alive: false,
+  }),
   buildCharacter({ name: 'Cedric Diggory', house: 'hufflepuff', alive: false, image: 'c.jpg' }),
   buildCharacter({ name: 'Argus Filch', actor: 'David Bradley' }),
   buildCharacter({ name: 'Ángel Exemplo', house: 'ravenclaw' }),
@@ -35,7 +45,9 @@ const names = (list: CharacterSummary[]) => list.map((character) => character.na
 
 describe('parseFilters', () => {
   it('lê filtros válidos da URL', () => {
-    const params = new URLSearchParams('q=harry&house=gryffindor&status=alive&sort=name-desc&photo=1')
+    const params = new URLSearchParams(
+      'q=harry&house=gryffindor&status=alive&sort=name-desc&photo=1',
+    )
 
     expect(parseFilters(params)).toEqual({
       query: 'harry',
@@ -78,19 +90,18 @@ describe('filterCharacters', () => {
   })
 
   it('filtra por casa e por "sem casa"', () => {
-    expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, house: 'slytherin' }))).toEqual([
-      'Severus Snape',
-    ])
+    expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, house: 'slytherin' }))).toEqual(
+      ['Severus Snape'],
+    )
     expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, house: 'none' }))).toEqual([
       'Argus Filch',
     ])
   })
 
   it('filtra por status', () => {
-    expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, status: 'deceased' }))).toEqual([
-      'Severus Snape',
-      'Cedric Diggory',
-    ])
+    expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, status: 'deceased' }))).toEqual(
+      ['Severus Snape', 'Cedric Diggory'],
+    )
   })
 
   it('busca por nome ou ator, ignorando acentos e maiúsculas', () => {
@@ -103,10 +114,9 @@ describe('filterCharacters', () => {
   })
 
   it('mostra apenas personagens com foto', () => {
-    expect(names(filterCharacters(characters, { ...DEFAULT_FILTERS, onlyWithImage: true }))).toEqual([
-      'Harry Potter',
-      'Cedric Diggory',
-    ])
+    expect(
+      names(filterCharacters(characters, { ...DEFAULT_FILTERS, onlyWithImage: true })),
+    ).toEqual(['Harry Potter', 'Cedric Diggory'])
   })
 
   it('ordena por nome', () => {

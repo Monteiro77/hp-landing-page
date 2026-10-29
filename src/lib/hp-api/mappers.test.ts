@@ -85,7 +85,17 @@ describe('toCharacterSummary', () => {
     const summary = toCharacterSummary(mapApiCharacter(buildApiCharacter()))
 
     expect(Object.keys(summary).sort()).toEqual(
-      ['actor', 'alive', 'birthDate', 'birthYear', 'house', 'id', 'image', 'name', 'patronus'].sort(),
+      [
+        'actor',
+        'alive',
+        'birthDate',
+        'birthYear',
+        'house',
+        'id',
+        'image',
+        'name',
+        'patronus',
+      ].sort(),
     )
   })
 })

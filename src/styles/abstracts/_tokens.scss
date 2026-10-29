@@ -1,0 +1,39 @@
+// Breakpoints (mobile-first).
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+// Cores das casas.
+// - primary: cor do brasão, usada em fundos e degradês.
+// - accent: metal do brasão (ouro, prata, bronze...).
+// - ink: versão legível sobre o fundo escuro, usada em textos e bordas.
+$houses: (
+  gryffindor: (
+    primary: #7a1015,
+    accent: #d3a625,
+    ink: #f0796b,
+  ),
+  slytherin: (
+    primary: #1a472a,
+    accent: #b9bec4,
+    ink: #63c98d,
+  ),
+  hufflepuff: (
+    primary: #7a5c0c,
+    accent: #ecb939,
+    ink: #f2cb5a,
+  ),
+  ravenclaw: (
+    primary: #1b2a5c,
+    accent: #b07f45,
+    ink: #8ea7f7,
+  ),
+  none: (
+    primary: #2b3045,
+    accent: #8b90a6,
+    ink: #b8bccc,
+  ),
+);
