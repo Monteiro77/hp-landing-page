@@ -1,0 +1,209 @@
+@use 'abstracts' as *;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(3rem, 1.5rem + 6vw, 6.5rem);
+  isolation: isolate;
+
+  // Céu estrelado feito só com gradientes (nenhuma imagem extra para baixar).
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.7), transparent),
+      radial-gradient(1px 1px at 28% 72%, rgb(255 255 255 / 0.5), transparent),
+      radial-gradient(1.5px 1.5px at 44% 32%, rgb(244 214 149 / 0.8), transparent),
+      radial-gradient(1px 1px at 63% 12%, rgb(255 255 255 / 0.6), transparent),
+      radial-gradient(1px 1px at 78% 58%, rgb(255 255 255 / 0.45), transparent),
+      radial-gradient(1.5px 1.5px at 90% 26%, rgb(255 255 255 / 0.7), transparent),
+      radial-gradient(1px 1px at 6% 88%, rgb(244 214 149 / 0.6), transparent),
+      radial-gradient(1px 1px at 52% 90%, rgb(255 255 255 / 0.4), transparent);
+    background-size: 420px 320px;
+    mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
+    animation: twinkle 6s ease-in-out infinite alternate;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+
+  // Brilho dourado atrás dos retratos.
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -10%;
+    z-index: -1;
+    width: min(42rem, 90vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(226 189 114 / 0.14), transparent 65%);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.inner {
+  @include container;
+  display: grid;
+  gap: var(--space-12);
+  align-items: center;
+
+  @include up(lg) {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-16);
+  }
+}
+
+.content {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.eyebrow {
+  @include eyebrow;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: rgb(226 189 114 / 0.06);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  letter-spacing: 0.01em;
+}
+
+.highlight {
+  background: linear-gradient(100deg, var(--color-gold-strong), var(--color-gold) 60%, #b88a3e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lead {
+  max-width: 36rem;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.primaryAction {
+  @include button(primary);
+}
+
+.secondaryAction {
+  @include button(ghost);
+}
+
+// Galeria de "quadros" no estilo dos retratos de Hogwarts.
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  width: 100%;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-top: var(--space-8);
+}
+
+.frame {
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  box-shadow:
+    0 0 0 1px var(--color-border-strong),
+    0 0 0 5px var(--color-bg),
+    0 0 0 6px rgb(226 189 114 / 0.22),
+    0 24px 50px -20px var(--house-primary);
+  animation: float 7s ease-in-out infinite;
+
+  &:nth-child(2) {
+    z-index: 1;
+    transform: translateY(-1.75rem) scale(1.1);
+    animation-name: float-featured;
+    animation-delay: -2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: -4s;
+  }
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes float-featured {
+  0%,
+  100% {
+    transform: translateY(-1.75rem) scale(1.1);
+  }
+
+  50% {
+    transform: translateY(-2.25rem) scale(1.1);
+  }
+}
+
+.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.stats {
+  @include container;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-4);
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+
+  @include up(md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-1);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-gold);
+}
+
+.statLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
