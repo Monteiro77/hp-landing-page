@@ -1,0 +1,219 @@
+@use 'abstracts' as *;
+
+.filters {
+  @include surface;
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+
+  @include up(md) {
+    padding: var(--space-5);
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+%control {
+  height: var(--control-height);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  transition:
+    border-color var(--duration) var(--ease-out),
+    background-color var(--duration) var(--ease-out);
+
+  @include hover {
+    background: var(--color-fill-hover);
+  }
+}
+
+// Busca
+
+.search {
+  position: relative;
+  flex: 1 1 18rem;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-4);
+  translate: 0 -50%;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.searchInput {
+  @extend %control;
+  width: 100%;
+  padding: 0 var(--control-height) 0 calc(var(--space-4) + 1.75rem);
+  font-size: var(--text-base);
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  // Usamos o nosso botão de limpar, com alvo de toque maior.
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  &:focus-visible {
+    outline-offset: 0;
+    border-color: var(--color-accent);
+  }
+}
+
+.clearSearch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: var(--control-height);
+  height: var(--control-height);
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--color-text-secondary);
+
+  @include hover {
+    color: var(--color-text);
+  }
+}
+
+// Selects
+
+.selectWrapper {
+  position: relative;
+  flex: 1 1 10rem;
+
+  @include up(md) {
+    flex: 0 0 auto;
+  }
+}
+
+.select {
+  @extend %control;
+  width: 100%;
+  padding: 0 calc(var(--space-4) + 1.5rem) 0 var(--space-4);
+  appearance: none;
+  cursor: pointer;
+
+  // As opções abertas usam as cores do sistema; garantimos legibilidade no tema escuro.
+  option {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+}
+
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  right: var(--space-4);
+  translate: 0 -50%;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+// Casas (barra de escopo)
+
+.houses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  flex: 1 1 auto;
+}
+
+.chip {
+  position: relative;
+
+  input {
+    @include visually-hidden;
+  }
+}
+
+.chipLabel {
+  @extend %control;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+
+  // Selecionado: inverte claro/escuro, então o estado não depende só da cor.
+  input:checked + & {
+    border-color: var(--color-text);
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-weight: 600;
+  }
+
+  input:focus-visible + & {
+    @include focus-ring;
+  }
+}
+
+.swatch {
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--house-primary) 50%, var(--house-accent) 50%);
+  box-shadow: 0 0 0 1px var(--color-border-strong);
+  rotate: 45deg;
+}
+
+// Extras
+
+.extras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.toggle {
+  @extend %control;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  font-weight: 500;
+
+  &[aria-pressed='true'] {
+    border-color: var(--color-text);
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-weight: 600;
+  }
+}
+
+.reset {
+  height: var(--control-height);
+  padding: 0 var(--space-3);
+  border: 0;
+  background: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+
+  @include hover {
+    text-decoration-color: currentColor;
+  }
+}

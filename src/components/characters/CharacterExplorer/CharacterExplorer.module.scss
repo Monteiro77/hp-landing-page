@@ -1,0 +1,44 @@
+@use 'abstracts' as *;
+
+.summary {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.results {
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+// Enquanto a nova lista é calculada, a anterior fica levemente apagada.
+.updating {
+  opacity: 0.6;
+}
+
+.more {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.progress {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.moreButton {
+  @include button(ghost);
+}
+
+// Placeholder da barra de filtros (mesma altura aproximada, evita salto de layout).
+.filtersSkeleton {
+  @include surface;
+  height: 8.5rem;
+  margin-bottom: var(--space-6);
+
+  @include up(lg) {
+    height: 7.25rem;
+  }
+}
