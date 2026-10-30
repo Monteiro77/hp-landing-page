@@ -11,8 +11,8 @@ Landing page com os personagens do universo Harry Potter, consumindo a [HP-API](
 - **Filtros** por casa (incluindo "sem casa"), status e "apenas com foto", além de **ordenação** por nome.
 - **Filtros na URL** (`/?q=snape&house=slytherin&status=deceased`): a busca pode ser compartilhada ou recarregada.
 - **Página de cada personagem** (`/personagem/[id]`) com varinha, espécie, ascendência, intérpretes e outros membros da casa.
-- **Seção das casas** com brasão, qualidades e atalho para a lista já filtrada.
-- **Tema claro e escuro** automático, seguindo a preferência do sistema.
+- **Seção das casas** com estandartes, qualidades e atalho para a lista já filtrada (também no header).
+- **Visual noturno** inspirado no site oficial do mundo bruxo: faixas de céu estrelado com silhuetas no horizonte, títulos serifados e ações em pílula violeta.
 - Estados de **carregamento** (skeletons), **lista vazia**, **erro** com "Tentar novamente" e **404**.
 - Textos em português, com concordância de gênero ("Viva", "Falecido", "Aluna de Hogwarts") e tradução de patronos, espécies e casas.
 
@@ -65,9 +65,9 @@ src/
 ├── components/
 │   ├── characters/         # Card, grade, filtros, explorador, perfil, retrato...
 │   ├── home/               # Hero e vitrine das casas
-│   ├── houses/             # Brasão das casas (SVG)
+│   ├── houses/             # Estandarte das casas (SVG)
 │   ├── layout/             # Header e footer
-│   └── ui/                 # Ícones, títulos de seção, mensagens de página
+│   └── ui/                 # Ícones, silhuetas do horizonte, títulos de seção, mensagens
 ├── constants/              # Casas, traduções e dados do site
 ├── hooks/                  # useFiltersInUrl
 ├── lib/
@@ -75,8 +75,8 @@ src/
 │   ├── characters/         # Filtros, formatação e estatísticas (com testes)
 │   └── utils/              # Funções de texto (com testes)
 ├── styles/
-│   ├── abstracts/          # Tokens (breakpoints, cores das casas) e mixins
-│   └── globals.scss        # Variáveis CSS, temas claro/escuro e reset
+│   ├── abstracts/          # Tokens (breakpoints, faixas de céu, cores das casas) e mixins
+│   └── globals.scss        # Variáveis CSS, tipografia e reset
 └── types/                  # Modelo de domínio (Character, CharacterSummary)
 ```
 
@@ -100,23 +100,29 @@ Cada componente fica em sua pasta, com `Componente.tsx`, `Componente.module.scss
 
 - Imagens com `next/image`: AVIF/WebP, `srcset` com `sizes` por breakpoint, lazy loading e `preload` só no retrato principal (LCP).
 - Paginação com "Carregar mais" (24 por vez): menos DOM e nenhuma imagem baixada antes da hora.
-- Uma única fonte web (Cinzel, só nos títulos, via `next/font`). O corpo usa a fonte do sistema.
-- Fundo e efeitos feitos só com CSS, sem imagens decorativas.
+- Fontes servidas pelo próprio site via `next/font` (sem requisição ao Google), com `font-display: swap`.
+- Céu estrelado feito com gradientes CSS e silhuetas do horizonte em SVG inline: nenhuma imagem decorativa para baixar.
 
-### Design e acessibilidade
+### Design
 
-As decisões visuais seguem as Human Interface Guidelines da Apple, adaptadas para a web:
+O visual segue a linguagem do [site oficial](https://www.harrypotter.com/pt), sem copiar seus arquivos ou marcas:
 
-- Cores semânticas com tema claro e escuro (`prefers-color-scheme`) e contraste mínimo de 5:1 nos textos, calculado nos dois temas.
-- Respeita `prefers-reduced-motion`, `prefers-contrast: more` e `prefers-reduced-transparency`.
-- O status (vivo/falecido) é diferenciado por forma e texto, não por cor, já que vermelho e verde identificam Grifinória e Sonserina.
+- Seções em faixas de céu noturno (azul-marinho, pedra e violeta) separadas por silhuetas de castelo, vilarejo e colinas, desenhadas para este projeto em SVG.
+- Títulos em **Crimson Pro** e textos em **Mulish**, fontes livres no lugar das fontes proprietárias do site oficial.
+- Header com marca centralizada e linha de pílulas das casas; botões em pílula com texto em caixa alta; molduras de linha dupla nos filtros, na ficha do personagem e nas mensagens.
+- Cards no estilo das vitrines de personagens: retrato com o nome serifado sobre um brilho violeta, estandarte da casa no canto e ficha em azul-marinho.
+
+### Acessibilidade
+
+- Contraste calculado para cada cor de texto (anotado em `globals.scss`): mínimo de 4,5:1 nos textos e 3:1 nos contornos e no anel de foco.
+- Respeita `prefers-reduced-motion` e `prefers-contrast: more`.
+- O status (vivo/falecido) é diferenciado por forma e texto, não só por cor: o selo de "vivo" é preenchido, o de "falecido" é vazado.
 - Alvos de toque de 44px, foco visível em todos os controles e card inteiro clicável com um único link (sem foco duplicado).
 - Busca com `role="search"`, contagem de resultados anunciada por leitores de tela, rótulos em todos os campos e "pular para o conteúdo".
-- Elemento-assinatura: os retratos em moldura de arco, como os quadros de Hogwarts. O restante da interface é discreto.
 
 ## Limitações conhecidas
 
-- A HP-API tem foto de apenas 25 dos 437 personagens. Os demais usam um monograma com as cores da casa.
+- A HP-API tem foto de apenas 25 dos 437 personagens. Os demais usam um monograma dourado sobre um fundo de nebulosa.
 - Um id inexistente em `/personagem/[id]` exibe a página 404 com `noindex`, mas responde HTTP 200: com Cache Components, o `notFound()` roda dentro do streaming e `dynamicParams` não está disponível.
 
 ## Deploy
