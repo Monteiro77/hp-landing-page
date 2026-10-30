@@ -49,15 +49,15 @@
   z-index: 1;
 }
 
-// Estandarte da casa pendurado no canto, como as fitas dos cards de quiz.
-.pennant {
+// Brasão da casa no canto, como as fitas dos cards de quiz do site oficial.
+.crest {
   position: absolute;
-  top: -0.3rem;
-  right: var(--space-3);
+  top: var(--space-2);
+  right: var(--space-2);
   z-index: 1;
-  width: 1.75rem;
-  height: auto;
-  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.5));
+  width: 2rem;
+  height: 2rem;
+  filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.6));
 }
 
 .name {

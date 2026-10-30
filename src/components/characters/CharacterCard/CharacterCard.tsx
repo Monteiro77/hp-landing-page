@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { HousePennant } from '@/components/houses/HousePennant'
+import { HouseCrest } from '@/components/houses/HouseCrest'
 import { PATRONUS_LABELS } from '@/constants/labels'
 import { formatBirthDate, translate } from '@/lib/characters/format'
 import { describeWand } from '@/lib/characters/wand'
@@ -37,7 +37,7 @@ export function CharacterCard({ character, headingLevel: Heading = 'h3' }: Chara
           className={styles.portrait}
         />
         <StatusBadge alive={alive} gender={gender} className={styles.status} />
-        {house && <HousePennant house={house} className={styles.pennant} />}
+        {house && <HouseCrest house={house} size={32} className={styles.crest} />}
         <Heading className={styles.name}>
           {/* O link "esticado" (::after) torna o card inteiro clicável, mantendo um único foco. */}
           <Link href={`/personagem/${id}`} className={styles.link}>

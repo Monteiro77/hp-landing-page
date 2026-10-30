@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { HousePennant } from '@/components/houses/HousePennant'
+import { HouseCrest } from '@/components/houses/HouseCrest'
 import { Icon } from '@/components/ui/Icon'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { HOUSE_IDS, HOUSES } from '@/constants/houses'
@@ -50,7 +50,7 @@ export function Header() {
           {HOUSE_IDS.map((id) => (
             <li key={id}>
               <Link href={`/?house=${id}#personagens`} className={styles.housePill}>
-                <HousePennant house={id} className={styles.pennant} />
+                <HouseCrest house={id} size={24} className={styles.crest} />
                 {HOUSES[id].name}
                 <Icon name="chevronRight" size={14} />
               </Link>

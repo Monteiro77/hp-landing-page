@@ -1,8 +1,9 @@
 'use client'
 
 import { useId } from 'react'
+import { HouseCrest } from '@/components/houses/HouseCrest'
 import { Icon } from '@/components/ui/Icon'
-import { HOUSE_IDS, HOUSES } from '@/constants/houses'
+import { HOUSE_IDS, HOUSES, isHouseId } from '@/constants/houses'
 import {
   type CharacterFilters as Filters,
   type HouseFilter,
@@ -131,7 +132,11 @@ export function CharacterFilters({ filters, onChange, onReset }: CharacterFilter
                 onChange={() => onChange({ house: option.value })}
               />
               <span className={styles.chipLabel}>
-                {option.value !== 'all' && <span className={styles.swatch} aria-hidden="true" />}
+                {isHouseId(option.value) ? (
+                  <HouseCrest house={option.value} size={22} className={styles.crest} />
+                ) : (
+                  option.value === 'none' && <span className={styles.swatch} aria-hidden="true" />
+                )}
                 {option.label}
               </span>
             </label>

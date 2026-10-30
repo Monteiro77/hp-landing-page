@@ -37,8 +37,11 @@ export function Footer() {
         <div className={styles.bottom}>
           <p className={styles.caption}>{SITE.name} · Projeto não oficial</p>
           <p>
-            Dados fornecidos pela HP-API. Projeto sem fins comerciais, desenvolvido como teste
-            técnico.
+            Dados fornecidos pela HP-API. Brasões das casas por{' '}
+            <a href="https://icons8.com" target="_blank" rel="noreferrer">
+              Icons8
+            </a>
+            . Projeto sem fins comerciais, desenvolvido como teste técnico.
           </p>
           <p>
             Harry Potter, seus personagens e elementos são marcas da Warner Bros. Entertainment Inc.
