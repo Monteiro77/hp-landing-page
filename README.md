@@ -98,7 +98,7 @@ Cada componente fica em sua pasta, com `Componente.tsx`, `Componente.module.scss
 
 ### Performance
 
-- Imagens com `next/image`: AVIF/WebP, `srcset` com `sizes` por breakpoint, lazy loading e `preload` só no retrato principal (LCP).
+- Imagens com `next/image`: `srcset` com `sizes` por breakpoint, lazy loading e `preload` só no retrato principal (LCP). Como as fotos da API são pequenas (a do Harry tem 163x227px), elas são servidas em WebP com qualidade 90: medido contra as originais, o AVIF q75 padrão criava manchas (33 dB de PSNR contra ~41 dB), sem ganho real de tamanho.
 - Paginação com "Carregar mais" (24 por vez): menos DOM e nenhuma imagem baixada antes da hora.
 - Fontes servidas pelo próprio site via `next/font` (sem requisição ao Google), com `font-display: swap`.
 - Céu estrelado feito com gradientes CSS e silhuetas do horizonte em SVG inline: nenhuma imagem decorativa para baixar.

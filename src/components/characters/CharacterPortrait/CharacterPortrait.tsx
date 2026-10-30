@@ -5,6 +5,9 @@ import { useState } from 'react'
 import { cn, getInitials } from '@/lib/utils/text'
 import styles from './CharacterPortrait.module.scss'
 
+/** Deve constar em `images.qualities` no next.config.ts. */
+const PORTRAIT_QUALITY = 90
+
 interface CharacterPortraitProps {
   name: string
   image: string | null
@@ -40,6 +43,7 @@ export function CharacterPortrait({
           alt={decorative ? '' : `Retrato de ${name}`}
           fill
           sizes={sizes}
+          quality={PORTRAIT_QUALITY}
           preload={preload}
           className={styles.image}
           onError={() => setHasError(true)}
