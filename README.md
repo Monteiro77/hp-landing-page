@@ -12,7 +12,7 @@ Landing page com os personagens do universo Harry Potter, consumindo a [HP-API](
 - **Filtros na URL** (`/?q=snape&house=slytherin&status=deceased`): a busca pode ser compartilhada ou recarregada.
 - **Página de cada personagem** (`/personagem/[id]`) com varinha, espécie, ascendência, intérpretes e outros membros da casa.
 - **Prévia da varinha** desenhada a partir dos dados da API: cor da madeira, comprimento real em uma régua de polegadas, brilho da ponta na cor do núcleo (fênix, dragão ou unicórnio) e cabo próprio de cada madeira. Aparece em miniatura nos cards e em destaque na página do personagem.
-- **Seção das casas** com estandartes, qualidades e atalho para a lista já filtrada (também no header).
+- **Seção das casas** com estandartes e brasões, qualidades e atalho para a lista já filtrada (também no header, com os brasões nas pílulas).
 - **Visual noturno** inspirado no site oficial do mundo bruxo: faixas de céu estrelado com silhuetas no horizonte, títulos serifados e ações em pílula violeta.
 - Estados de **carregamento** (skeletons), **lista vazia**, **erro** com "Tentar novamente" e **404**.
 - Textos em português, com concordância de gênero ("Viva", "Falecido", "Aluna de Hogwarts") e tradução de patronos, espécies e casas.
@@ -66,7 +66,7 @@ src/
 ├── components/
 │   ├── characters/         # Card, grade, filtros, explorador, perfil, retrato, varinha...
 │   ├── home/               # Hero e vitrine das casas
-│   ├── houses/             # Estandarte das casas (SVG)
+│   ├── houses/             # Estandartes (SVG) e brasões das casas
 │   ├── layout/             # Header e footer
 │   └── ui/                 # Ícones, silhuetas do horizonte, títulos de seção, mensagens
 ├── constants/              # Casas, traduções e dados do site
@@ -132,4 +132,4 @@ O projeto está pronto para a [Vercel](https://vercel.com): importe o repositór
 
 ## Créditos
 
-Dados da [HP-API](https://hp-api.onrender.com). A imagem do hero é material promocional dos filmes, usada sem fins comerciais. O logo é um desenho próprio. Harry Potter e seus personagens são marcas da Warner Bros. Entertainment. Projeto sem fins comerciais.
+Dados da [HP-API](https://hp-api.onrender.com). A imagem do hero é material promocional dos filmes, usada sem fins comerciais. Brasões das casas por [Icons8](https://icons8.com). O logo é um desenho próprio. Harry Potter e seus personagens são marcas da Warner Bros. Entertainment. Projeto sem fins comerciais.
