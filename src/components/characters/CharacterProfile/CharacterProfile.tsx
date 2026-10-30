@@ -1,26 +1,51 @@
 import { ANCESTRY_LABELS, GENDER_LABELS, PATRONUS_LABELS, SPECIES_LABELS } from '@/constants/labels'
-import { formatBirthDate, formatHouse, formatWandLength, translate } from '@/lib/characters/format'
-import { capitalize } from '@/lib/utils/text'
+import { formatBirthDate, formatHouse, translate } from '@/lib/characters/format'
+import { formatWandCore, formatWandLength, formatWandWood } from '@/lib/characters/wand'
 import type { Character, Wand } from '@/types/character'
 import { CharacterPortrait } from '../CharacterPortrait'
 import { HouseTag } from '../HouseTag'
 import { StatusBadge } from '../StatusBadge'
+import { WandPreview } from '../WandPreview'
 import styles from './CharacterProfile.module.scss'
 
 interface CharacterProfileProps {
   character: Character
 }
 
-function formatWand(wand: Wand | null): string | null {
-  if (!wand) return null
+function DetailList({ items }: { items: Array<{ label: string; value: string | null }> }) {
+  return items.map(({ label, value }) => (
+    <div key={label} className={styles.detail}>
+      <dt>{label}</dt>
+      {value ? <dd>{value}</dd> : <dd className={styles.unknown}>Não informado</dd>}
+    </div>
+  ))
+}
 
-  const parts = [
-    wand.wood && capitalize(wand.wood),
-    wand.core,
-    wand.length !== null && formatWandLength(wand.length),
-  ].filter(Boolean)
-
-  return parts.length > 0 ? parts.join(', ') : null
+function WandSection({ wand, characterId }: { wand: Wand | null; characterId: string }) {
+  return (
+    <section className={styles.wand} aria-labelledby="wand-title">
+      <h2 id="wand-title" className={styles.wandTitle}>
+        Varinha
+      </h2>
+      <WandPreview wand={wand} id={`profile-${characterId}`} className={styles.wandPreview} />
+      {wand ? (
+        <dl className={styles.wandSpecs}>
+          <DetailList
+            items={[
+              { label: 'Madeira', value: formatWandWood(wand.wood) },
+              { label: 'Núcleo', value: formatWandCore(wand.core) },
+              {
+                label: 'Comprimento',
+                value: wand.length !== null ? formatWandLength(wand.length) : null,
+              },
+            ]}
+          />
+        </dl>
+      ) : (
+        <p className={styles.wandEmpty}>A HP-API não tem registro da varinha deste personagem.</p>
+      )}
+    </section>
+  )
 }
 
 /** Papéis do personagem, com concordância de gênero ("Aluna de Hogwarts", "Bruxo"...). */
@@ -46,7 +71,6 @@ export function CharacterProfile({ character }: CharacterProfileProps) {
     { label: 'Espécie', value: translate(character.species, SPECIES_LABELS) },
     { label: 'Gênero', value: translate(character.gender, GENDER_LABELS) },
     { label: 'Ascendência', value: translate(character.ancestry, ANCESTRY_LABELS) },
-    { label: 'Varinha', value: formatWand(character.wand) },
   ]
 
   return (
@@ -83,13 +107,10 @@ export function CharacterProfile({ character }: CharacterProfileProps) {
         </header>
 
         <dl className={styles.details}>
-          {details.map(({ label, value }) => (
-            <div key={label} className={styles.detail}>
-              <dt>{label}</dt>
-              {value ? <dd>{value}</dd> : <dd className={styles.unknown}>Não informado</dd>}
-            </div>
-          ))}
+          <DetailList items={details} />
         </dl>
+
+        <WandSection wand={character.wand} characterId={character.id} />
       </div>
     </article>
   )

@@ -96,6 +96,7 @@ describe('toCharacterSummary', () => {
         'image',
         'name',
         'patronus',
+        'wand',
       ].sort(),
     )
   })

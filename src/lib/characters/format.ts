@@ -36,7 +36,3 @@ export function translate(value: string | null, dictionary: Record<string, strin
   if (!value) return null
   return dictionary[value.toLowerCase()] ?? capitalize(value)
 }
-
-export function formatWandLength(length: number): string {
-  return `${length.toLocaleString('pt-BR')} polegadas`
-}

@@ -2,10 +2,12 @@ import Link from 'next/link'
 import { HousePennant } from '@/components/houses/HousePennant'
 import { PATRONUS_LABELS } from '@/constants/labels'
 import { formatBirthDate, translate } from '@/lib/characters/format'
+import { describeWand } from '@/lib/characters/wand'
 import type { CharacterSummary } from '@/types/character'
 import { CharacterPortrait } from '../CharacterPortrait'
 import { HouseTag } from '../HouseTag'
 import { StatusBadge } from '../StatusBadge'
+import { WandPreview } from '../WandPreview'
 import styles from './CharacterCard.module.scss'
 
 // Deve acompanhar as colunas definidas em CharacterGrid.module.scss.
@@ -21,7 +23,8 @@ function DetailValue({ value }: { value: string | null }) {
 }
 
 export function CharacterCard({ character, headingLevel: Heading = 'h3' }: CharacterCardProps) {
-  const { id, name, image, house, birthDate, birthYear, patronus, actor, alive, gender } = character
+  const { id, name, image, house, birthDate, birthYear, patronus, actor, alive, gender, wand } =
+    character
 
   return (
     <article className={styles.card} data-house={house ?? 'none'}>
@@ -58,6 +61,17 @@ export function CharacterCard({ character, headingLevel: Heading = 'h3' }: Chara
           <div className={styles.detail}>
             <dt>Ator/Atriz</dt>
             <DetailValue value={actor} />
+          </div>
+          <div className={styles.detail}>
+            <dt>Varinha</dt>
+            {wand ? (
+              <dd className={styles.wand}>
+                <WandPreview wand={wand} id={`card-${id}`} variant="compact" />
+                <span>{describeWand(wand, true)}</span>
+              </dd>
+            ) : (
+              <dd className={styles.unknown}>Não informado</dd>
+            )}
           </div>
         </dl>
       </div>

@@ -63,3 +63,26 @@ export const ANCESTRY_LABELS: Record<string, string> = {
   'quarter-veela': 'Um quarto veela',
   squib: 'Aborto',
 }
+
+export const WAND_WOOD_LABELS: Record<string, string> = {
+  alder: 'Amieiro',
+  ash: 'Freixo',
+  birch: 'Bétula',
+  cedar: 'Cedro',
+  cherry: 'Cerejeira',
+  chestnut: 'Castanheiro',
+  cypress: 'Cipreste',
+  elm: 'Olmo',
+  fir: 'Abeto',
+  hawthorn: 'Espinheiro',
+  hazel: 'Aveleira',
+  holly: 'Azevinho',
+  hornbeam: 'Carpino',
+  larch: 'Lariço',
+  mahogany: 'Mogno',
+  oak: 'Carvalho',
+  vine: 'Videira',
+  walnut: 'Nogueira',
+  willow: 'Salgueiro',
+  yew: 'Teixo',
+}

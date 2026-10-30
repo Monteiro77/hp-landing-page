@@ -120,6 +120,13 @@
   }
 }
 
+// Miniatura da varinha em escala (régua de 18 polegadas = largura do card) + descrição.
+.detail .wand {
+  display: grid;
+  gap: var(--space-1);
+  padding-top: 0.125rem;
+}
+
 .detail .unknown {
   font-weight: 400;
   color: var(--color-text-tertiary);

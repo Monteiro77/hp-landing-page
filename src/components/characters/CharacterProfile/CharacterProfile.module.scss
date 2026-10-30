@@ -109,6 +109,54 @@
   }
 }
 
+// Varinha: desenho em escala sobre uma "caixa" escura, como as da loja de varinhas.
+
+.wand {
+  @include ornate-frame;
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background:
+    radial-gradient(80% 120% at 50% 40%, rgb(87 88 255 / 0.18), transparent 70%), rgb(0 0 27 / 0.6);
+
+  @include up(sm) {
+    padding: var(--space-8) var(--space-10);
+  }
+}
+
+.wandTitle {
+  font-size: var(--text-xl);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wandPreview {
+  padding-block: var(--space-2);
+}
+
+.wandSpecs {
+  display: grid;
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+
+  @include up(sm) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+    padding: 0;
+    border: 0;
+  }
+}
+
+.wandEmpty {
+  font-weight: 300;
+  color: var(--color-text-secondary);
+}
+
 // Skeleton
 
 .skeleton {

@@ -1,0 +1,57 @@
+@use 'abstracts' as *;
+
+.wand {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.unknown {
+  fill: none;
+  stroke: var(--color-text-tertiary);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.ruler {
+  stroke: rgb(255 255 255 / 0.45);
+  stroke-width: 1;
+
+  text {
+    fill: var(--color-text-secondary);
+    stroke: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+// Trecho da régua ocupado pela varinha.
+.measure {
+  stroke: var(--color-gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.glow {
+  mix-blend-mode: screen;
+}
+
+// Brilho suave da ponta (só na versão completa e sem "reduzir movimento").
+.pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wand-glow 2.8s ease-in-out infinite;
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+@keyframes wand-glow {
+  50% {
+    opacity: 0.55;
+    scale: 0.85;
+  }
+}

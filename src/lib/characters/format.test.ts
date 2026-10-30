@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { PATRONUS_LABELS } from '@/constants/labels'
-import { formatBirthDate, formatHouse, formatStatus, formatWandLength, translate } from './format'
+import { formatBirthDate, formatHouse, formatStatus, translate } from './format'
 
 describe('formatBirthDate', () => {
   it('formata a data completa em português', () => {
@@ -44,11 +44,5 @@ describe('translate', () => {
 
   it('retorna null para valores ausentes', () => {
     expect(translate(null, PATRONUS_LABELS)).toBeNull()
-  })
-})
-
-describe('formatWandLength', () => {
-  it('usa vírgula decimal', () => {
-    expect(formatWandLength(10.25)).toBe('10,25 polegadas')
   })
 })

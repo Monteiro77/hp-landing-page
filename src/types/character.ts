@@ -43,4 +43,5 @@ export type CharacterSummary = Pick<
   | 'actor'
   | 'alive'
   | 'gender'
+  | 'wand'
 >
