@@ -41,12 +41,9 @@ export default async function HomePage({ searchParams }: PageProps<'/'>) {
   const characters = (await getCharacters()).map(toCharacterSummary)
   const stats = getCharacterStats(characters)
 
-  // Os três primeiros com foto: a API já lista os protagonistas primeiro.
-  const featured = characters.filter((character) => character.image !== null).slice(0, 3)
-
   return (
     <>
-      <Hero stats={stats} featured={featured} />
+      <Hero stats={stats} />
       <HouseShowcase counts={stats.byHouse} />
 
       <section id="personagens" className={styles.section} aria-labelledby="personagens-title">

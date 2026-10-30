@@ -70,55 +70,56 @@
   }
 }
 
-// Destaques no estilo das vitrines do site oficial: retrato com o nome sobre um brilho violeta.
-.picks {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 1.5vw, 1rem);
-  padding: 0;
-  list-style: none;
-}
-
-.pick {
+// Harry voando diante da lua: o disco claro destaca a silhueta escura da capa.
+.visual {
   position: relative;
-  display: block;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-card);
-  transition: box-shadow var(--duration) var(--ease-out);
+  // Fica à frente da silhueta do castelo, como se voasse sobre ele.
+  z-index: 1;
+  justify-self: center;
+  width: min(100%, 22rem);
+  margin-bottom: calc(-1 * clamp(3rem, 2rem + 4vw, 6rem));
 
-  // Brilho violeta na base, onde fica o nome.
-  &::after {
+  @include up(md) {
+    width: min(100%, 28rem);
+  }
+
+  &::before {
     content: '';
     position: absolute;
-    inset: 45% 0 0;
-    background:
-      radial-gradient(120% 70% at 50% 100%, rgb(110 80 230 / 0.85), transparent 70%),
-      linear-gradient(transparent, rgb(30 20 80 / 0.9));
-    pointer-events: none;
-  }
-
-  @include hover {
-    box-shadow:
-      var(--shadow-card),
-      0 0 0 2px var(--color-accent);
+    top: 2%;
+    left: 8%;
+    z-index: -1;
+    width: 84%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 42% 38%,
+      #fbf6ea 0%,
+      #e6e0ff 38%,
+      rgb(170 160 255 / 0.55) 56%,
+      rgb(87 88 255 / 0.18) 66%,
+      transparent 72%
+    );
   }
 }
 
-.pickPortrait {
-  aspect-ratio: 3 / 4.2;
+.harry {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.55));
+  animation: hover 7s ease-in-out infinite;
+
+  @include reduced-motion {
+    animation: none;
+  }
 }
 
-.pickName {
-  position: absolute;
-  inset: auto var(--space-2) var(--space-3);
-  z-index: 1;
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 0.7rem + 1vw, 1.5rem);
-  font-weight: 600;
-  line-height: 1.05;
-  text-align: center;
-  text-shadow: 0 2px 8px rgb(0 0 0 / 0.6);
+// Leve flutuação, como quem paira na vassoura.
+@keyframes hover {
+  50% {
+    translate: 0 -0.75rem;
+  }
 }
 
 .horizon {
