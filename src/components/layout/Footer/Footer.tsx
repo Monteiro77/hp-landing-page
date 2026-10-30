@@ -1,27 +1,47 @@
+import Link from 'next/link'
+import { LogoMark } from '@/components/ui/LogoMark'
 import { SITE } from '@/constants/site'
 import styles from './Footer.module.scss'
+
+const LINKS = [
+  { href: '/#casas', label: 'Casas de Hogwarts', external: false },
+  { href: '/#personagens', label: 'Personagens', external: false },
+  { href: SITE.apiDocsUrl, label: 'HP-API', external: true },
+  { href: SITE.repositoryUrl, label: 'Código no GitHub', external: true },
+] as const
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.inner}>
-        <p className={styles.brand}>{SITE.name}</p>
-
-        <div className={styles.content}>
-          <p>
-            Dados fornecidos pela{' '}
-            <a href={SITE.apiDocsUrl} target="_blank" rel="noreferrer">
-              HP-API
-            </a>
-            . Código disponível no{' '}
-            <a href={SITE.repositoryUrl} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            .
+      <div className={styles.box}>
+        <div className={styles.top}>
+          <ul className={styles.links}>
+            {LINKS.map((link) => (
+              <li key={link.href}>
+                {link.external ? (
+                  <a href={link.href} target="_blank" rel="noreferrer">
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link href={link.href}>{link.label}</Link>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className={styles.brand}>
+            <LogoMark className={styles.logo} />
+            {SITE.name}
           </p>
-          <p className={styles.legal}>
-            Harry Potter e seus personagens são marcas da Warner Bros. Entertainment. Projeto sem
-            fins comerciais, desenvolvido como teste técnico.
+        </div>
+
+        <div className={styles.bottom}>
+          <p className={styles.caption}>{SITE.name} · Projeto não oficial</p>
+          <p>
+            Dados fornecidos pela HP-API. Projeto sem fins comerciais, desenvolvido como teste
+            técnico.
+          </p>
+          <p>
+            Harry Potter, seus personagens e elementos são marcas da Warner Bros. Entertainment Inc.
           </p>
         </div>
       </div>

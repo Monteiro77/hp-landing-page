@@ -6,40 +6,54 @@ $breakpoints: (
   xl: 1280px,
 );
 
+// Faixas de céu noturno que separam as seções (do topo para o horizonte).
+$skies: (
+  navy: (
+    top: #15111d,
+    bottom: #323657,
+  ),
+  violet: (
+    top: #120b0e,
+    bottom: #474083,
+  ),
+  stone: (
+    top: #110b0e,
+    bottom: #373737,
+  ),
+  gold: (
+    top: #18150e,
+    bottom: #554936,
+  ),
+);
+
 // Cores das casas.
-// - primary: cor do brasão, usada em fundos e degradês (igual nos dois temas, como uma pintura).
+// - primary: cor do estandarte, usada em fundos e degradês.
 // - accent: metal do brasão (ouro, prata, bronze...).
-// - ink-light / ink-dark: versão para texto, com contraste mínimo de 6:1 sobre a superfície
-//   do tema correspondente (#ffffff no claro, #151a2a no escuro).
+// - ink: versão para texto sobre o fundo escuro (contraste mínimo de 6:1).
 $houses: (
   gryffindor: (
-    primary: #7a1015,
-    accent: #d3a625,
-    ink-light: #a3171c,
-    ink-dark: #f0796b,
+    primary: #9b1b1f,
+    accent: #e3b23c,
+    ink: #f0796b,
   ),
   slytherin: (
-    primary: #1a472a,
-    accent: #b9bec4,
-    ink-light: #1d6b3a,
-    ink-dark: #63c98d,
+    primary: #1a6b46,
+    accent: #c9ced4,
+    ink: #63c98d,
   ),
   hufflepuff: (
-    primary: #7a5c0c,
-    accent: #ecb939,
-    ink-light: #7f5c00,
-    ink-dark: #f2cb5a,
+    primary: #d9a51c,
+    accent: #2a2214,
+    ink: #f2cb5a,
   ),
   ravenclaw: (
-    primary: #1b2a5c,
-    accent: #b07f45,
-    ink-light: #2b3f91,
-    ink-dark: #8ea7f7,
+    primary: #1f4fa3,
+    accent: #c9a26b,
+    ink: #8ea7f7,
   ),
   none: (
-    primary: #2b3045,
-    accent: #a9aec2,
-    ink-light: #5b6075,
-    ink-dark: #b8bccc,
+    primary: #3b3f66,
+    accent: #c3c6e0,
+    ink: #b8bccc,
   ),
 );

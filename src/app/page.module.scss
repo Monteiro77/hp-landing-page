@@ -1,6 +1,14 @@
 @use 'abstracts' as *;
 
 .section {
+  @include night-sky(violet);
+  padding: var(--section-spacing) 0 clamp(6rem, 4rem + 8vw, 10rem);
+}
+
+.inner {
   @include container;
-  padding-top: var(--section-spacing);
+}
+
+.horizon {
+  color: var(--color-chrome);
 }

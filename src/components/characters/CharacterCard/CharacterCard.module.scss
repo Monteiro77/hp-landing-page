@@ -1,40 +1,20 @@
 @use 'abstracts' as *;
 
 .card {
-  @include surface;
   position: relative;
   display: grid;
-  // Mobile: card horizontal (retrato à esquerda) para mostrar mais personagens por tela.
-  grid-template-columns: 7.5rem 1fr;
+  grid-template-rows: auto 1fr;
   height: 100%;
   overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
   box-shadow: var(--shadow-card);
-  // Sem deslocamento no hover: a grade é percorrida o tempo todo, então o retorno é só de borda
-  // e sombra, sem movimento.
-  transition:
-    border-color var(--duration) var(--ease-out),
-    box-shadow var(--duration) var(--ease-out);
-
-  // Filete superior com a cor da casa.
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 1;
-    height: 3px;
-    background: linear-gradient(90deg, var(--house-ink), var(--house-accent));
-  }
-
-  @include up(sm) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
+  transition: box-shadow var(--duration) var(--ease-out);
 
   @include hover {
-    border-color: var(--house-ink);
     box-shadow:
       var(--shadow-card),
-      0 24px 48px -24px var(--house-primary);
+      0 0 0 2px var(--color-accent);
   }
 
   // O foco do link "esticado" é exibido no card inteiro.
@@ -43,49 +23,52 @@
   }
 }
 
+// Retrato com o nome sobre um brilho violeta, como as vitrines de personagens do site oficial.
 .media {
   position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 40% 0 0;
+    background:
+      radial-gradient(120% 70% at 50% 100%, rgb(110 80 230 / 0.8), transparent 70%),
+      linear-gradient(transparent, rgb(25 18 70 / 0.92));
+    pointer-events: none;
+  }
 }
 
 .portrait {
-  height: 100%;
-  min-height: 9.5rem;
-
-  @include up(sm) {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 4 / 5;
-  }
+  aspect-ratio: 3 / 4;
 }
 
 .status {
   position: absolute;
+  top: var(--space-2);
   left: var(--space-2);
-  bottom: var(--space-2);
-
-  @include up(sm) {
-    left: var(--space-3);
-    bottom: var(--space-3);
-  }
+  z-index: 1;
 }
 
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
-  padding: var(--space-4);
-
-  @include up(sm) {
-    padding: var(--space-5);
-  }
+// Estandarte da casa pendurado no canto, como as fitas dos cards de quiz.
+.pennant {
+  position: absolute;
+  top: -0.3rem;
+  right: var(--space-3);
+  z-index: 1;
+  width: 1.75rem;
+  height: auto;
+  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.5));
 }
 
 .name {
-  font-size: var(--text-lg);
+  position: absolute;
+  inset: auto var(--space-2) var(--space-3);
+  z-index: 1;
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.375rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: 1.05;
+  text-align: center;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 0.65);
 }
 
 .link {
@@ -94,7 +77,8 @@
   &::after {
     content: '';
     position: absolute;
-    inset: 0;
+    // Cobre o card inteiro (o .card é o ancestral posicionado mais externo com overflow).
+    inset: -100vh -100vw;
     z-index: 2;
   }
 
@@ -103,12 +87,21 @@
   }
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+
+  @include up(sm) {
+    padding: var(--space-4);
+  }
+}
+
 .details {
   display: grid;
-  gap: var(--space-3);
-  margin-top: auto;
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
+  gap: var(--space-2);
 }
 
 .detail {
@@ -121,8 +114,9 @@
 
   dd {
     font-size: var(--text-sm);
-    font-weight: 500;
-    line-height: 1.4;
+    font-weight: 600;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
   }
 }
 

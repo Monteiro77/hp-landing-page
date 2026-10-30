@@ -1,17 +1,19 @@
-.shield {
-  fill: var(--house-primary);
-  stroke: var(--house-accent);
+.rod {
+  fill: var(--color-gold);
 }
 
-.inner {
+.field {
+  fill: var(--house-primary);
+}
+
+.trim {
   fill: none;
   stroke: var(--house-accent);
-  stroke-opacity: 0.4;
 }
 
 .initial {
   fill: var(--house-accent);
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
 }

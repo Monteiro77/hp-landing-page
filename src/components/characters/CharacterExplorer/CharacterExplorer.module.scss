@@ -2,8 +2,10 @@
 
 .summary {
   margin-bottom: var(--space-4);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
 }
 
@@ -29,16 +31,17 @@
 }
 
 .moreButton {
-  @include button(ghost);
+  @include button(primary);
 }
 
 // Placeholder da barra de filtros (mesma altura aproximada, evita salto de layout).
 .filtersSkeleton {
-  @include surface;
-  height: 8.5rem;
+  @include ornate-frame;
+  height: 11rem;
   margin-bottom: var(--space-6);
+  background: rgb(0 0 27 / 0.55);
 
   @include up(lg) {
-    height: 7.25rem;
+    height: 9.5rem;
   }
 }

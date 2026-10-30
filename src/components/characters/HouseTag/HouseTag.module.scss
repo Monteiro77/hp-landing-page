@@ -1,11 +1,10 @@
+@use 'abstracts' as *;
+
+// Etiqueta escura em caixa alta, como as dos cards de notícia do site oficial.
 .tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45em;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  @include tag;
+  align-self: flex-start;
+  background: #1b2150;
   color: var(--house-ink);
 }
 

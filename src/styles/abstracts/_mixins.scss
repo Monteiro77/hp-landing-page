@@ -38,7 +38,7 @@
 }
 
 @mixin focus-ring {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
 
@@ -54,11 +54,11 @@
   border: 0;
 }
 
-/// Rótulo curto acima de títulos. Discreto: o destaque visual fica com o conteúdo.
+/// Rótulo curto acima de títulos.
 @mixin eyebrow {
   font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-secondary);
 }
@@ -66,14 +66,27 @@
 /// Rótulo de dado (ex.: "Nascimento"). 12px é o menor tamanho de texto do site.
 @mixin data-label {
   font-size: var(--text-2xs);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-secondary);
 }
 
-/// Botões e links com aparência de botão. Variantes: primary | ghost.
-/// O acento dourado fica reservado para a ação principal.
+/// Etiqueta em caixa alta sobre fundo escuro (casa, "novo"...).
+@mixin tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3em 0.65em;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/// Botões em pílula com texto em caixa alta. Variantes: primary (violeta) | ghost (contorno).
 @mixin button($variant: primary) {
   display: inline-flex;
   align-items: center;
@@ -83,28 +96,33 @@
   padding: 0 var(--space-6);
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-size: var(--text-xs);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   white-space: nowrap;
   transition:
     background-color var(--duration) var(--ease-out),
     border-color var(--duration) var(--ease-out),
-    filter var(--duration) var(--ease-out);
+    color var(--duration) var(--ease-out);
 
   @if $variant == primary {
-    background: var(--color-accent-fill);
+    border-color: var(--color-accent);
+    background: var(--color-accent);
     color: var(--color-on-accent);
 
     @include hover {
-      filter: brightness(1.06);
+      border-color: var(--color-accent-hover);
+      background: var(--color-accent-hover);
     }
   } @else {
-    border-color: var(--color-border-strong);
-    background: var(--color-fill);
+    border-color: var(--color-text);
+    background: transparent;
     color: var(--color-text);
 
     @include hover {
-      background: var(--color-fill-hover);
+      background: var(--color-text);
+      color: var(--color-chrome);
     }
   }
 
@@ -114,8 +132,48 @@
   }
 }
 
-@mixin surface {
-  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg-elevated) 100%);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+/// Painel azul-marinho translúcido com borda violeta (opções, filtros).
+@mixin panel {
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-panel);
+}
+
+/// Moldura de linha dupla, como os quadros e enquetes do mundo bruxo.
+@mixin ornate-frame {
+  position: relative;
+  border: 1px solid var(--color-frame);
+  outline: 1px solid var(--color-frame);
+  outline-offset: -7px;
+}
+
+/// Faixa de céu noturno: estrelas feitas com gradientes + degradê da faixa.
+@mixin night-sky($sky) {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(1px 1px at 8% 14%, rgb(255 255 255 / 0.7), transparent),
+    radial-gradient(1px 1px at 22% 62%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 37% 28%, rgb(255 255 255 / 0.8), transparent),
+    radial-gradient(1px 1px at 51% 78%, rgb(255 255 255 / 0.4), transparent),
+    radial-gradient(1px 1px at 64% 9%, rgb(255 255 255 / 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 77% 46%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 91% 23%, rgb(255 255 255 / 0.7), transparent),
+    radial-gradient(1px 1px at 96% 71%, rgb(255 255 255 / 0.4), transparent),
+    linear-gradient(map.get($skies, $sky, top) 0%, map.get($skies, $sky, bottom) 120%);
+  background-size:
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    380px 300px,
+    100% 100%;
+}
+
+/// Cor de topo de uma faixa de céu (usada na silhueta da faixa anterior).
+@function sky-top($sky) {
+  @return map.get($skies, $sky, top);
 }

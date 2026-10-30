@@ -1,1 +1,0 @@
-export { HouseCrest } from './HouseCrest'

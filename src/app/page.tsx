@@ -5,6 +5,7 @@ import {
 } from '@/components/characters/CharacterExplorer'
 import { Hero } from '@/components/home/Hero'
 import { HouseShowcase } from '@/components/home/HouseShowcase'
+import { Horizon } from '@/components/ui/Horizon'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { filtersToSearchParams, parseFilters } from '@/lib/characters/filters'
 import { getCharacterStats } from '@/lib/characters/stats'
@@ -40,9 +41,8 @@ export default async function HomePage({ searchParams }: PageProps<'/'>) {
   const characters = (await getCharacters()).map(toCharacterSummary)
   const stats = getCharacterStats(characters)
 
-  // Os três primeiros com foto (a API lista os protagonistas primeiro), com o 1º no centro.
-  const [first, second, third] = characters.filter((character) => character.image !== null)
-  const featured = [second, first, third].filter(Boolean)
+  // Os três primeiros com foto: a API já lista os protagonistas primeiro.
+  const featured = characters.filter((character) => character.image !== null).slice(0, 3)
 
   return (
     <>
@@ -50,15 +50,18 @@ export default async function HomePage({ searchParams }: PageProps<'/'>) {
       <HouseShowcase counts={stats.byHouse} />
 
       <section id="personagens" className={styles.section} aria-labelledby="personagens-title">
-        <SectionHeading
-          id="personagens-title"
-          eyebrow={pluralize(stats.total, 'personagem', 'personagens')}
-          title="Quem é quem no mundo bruxo"
-          description="Busque pelo nome do personagem ou do ator e filtre por casa ou status."
-        />
-        <Suspense fallback={<CharacterExplorerSkeleton />}>
-          <CharacterResults characters={characters} searchParams={searchParams} />
-        </Suspense>
+        <div className={styles.inner}>
+          <SectionHeading
+            id="personagens-title"
+            eyebrow={pluralize(stats.total, 'personagem', 'personagens')}
+            title="Quem é quem no mundo bruxo"
+            description="Busque pelo nome do personagem ou do ator e filtre por casa ou status."
+          />
+          <Suspense fallback={<CharacterExplorerSkeleton />}>
+            <CharacterResults characters={characters} searchParams={searchParams} />
+          </Suspense>
+        </div>
+        <Horizon variant="hills" className={styles.horizon} />
       </section>
     </>
   )

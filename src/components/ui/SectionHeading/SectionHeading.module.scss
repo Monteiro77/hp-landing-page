@@ -2,26 +2,52 @@
 
 .heading {
   display: grid;
-  gap: var(--space-3);
-  max-width: 42rem;
-  margin-bottom: var(--space-10);
-}
-
-.center {
-  margin-inline: auto;
-  text-align: center;
   justify-items: center;
+  gap: var(--space-3);
+  max-width: 64rem;
+  margin: 0 auto var(--space-10);
+  text-align: center;
 }
 
 .eyebrow {
   @include eyebrow;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
 .title {
+  // Os filetes é que cedem espaço; o título só quebra quando não cabe na linha inteira.
+  flex-shrink: 0;
+  max-width: 100%;
   font-size: var(--text-2xl);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ornament {
+  flex: 0 1 8rem;
+  min-width: 2.5rem;
+  height: 0.75rem;
+  color: rgb(255 255 255 / 0.55);
+
+  // Em telas estreitas o título quebra em duas linhas e os filetes ficariam espremidos.
+  @include down(md) {
+    display: none;
+  }
+}
+
+.flip {
+  transform: scaleX(-1);
 }
 
 .description {
+  max-width: 38rem;
   color: var(--color-text-secondary);
   font-size: var(--text-lg);
 }

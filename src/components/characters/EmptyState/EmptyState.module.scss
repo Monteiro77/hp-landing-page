@@ -4,9 +4,9 @@
   display: grid;
   justify-items: center;
   gap: var(--space-3);
+  @include ornate-frame;
   padding: var(--space-16) var(--space-6);
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-lg);
+  background: rgb(0 0 27 / 0.55);
   text-align: center;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .title {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
 }
 
 .text {
@@ -24,6 +24,6 @@
 }
 
 .action {
-  @include button(ghost);
+  @include button(primary);
   margin-top: var(--space-2);
 }

@@ -1,18 +1,12 @@
-// O status é diferenciado pela forma do marcador (cheio = vivo, vazado = falecido) e pelo
-// texto, não pela cor: vermelho e verde já identificam Grifinória e Sonserina.
+@use 'abstracts' as *;
+
+// Selo no estilo do "novo" do site oficial. O status é diferenciado também pela forma do
+// marcador (cheio = vivo, vazado = falecido) e pelo texto, não só pela cor.
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45em;
-  padding: 0.25em 0.7em;
-  border: 1px solid var(--color-border-strong);
+  @include tag;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  font-size: var(--text-2xs);
-  font-weight: 600;
-  line-height: 1.4;
   white-space: nowrap;
-  color: var(--color-text);
 }
 
 .dot {
@@ -22,10 +16,17 @@
   border-radius: 50%;
 }
 
-.alive .dot {
-  background: currentColor;
+.alive {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+
+  .dot {
+    background: currentColor;
+  }
 }
 
 .deceased {
-  color: var(--color-text-secondary);
+  border-color: rgb(255 255 255 / 0.45);
+  background: rgb(0 0 27 / 0.8);
+  color: var(--color-text);
 }

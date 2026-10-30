@@ -1,0 +1,8 @@
+.horizon {
+  position: absolute;
+  inset: auto 0 -1px;
+  width: 100%;
+  height: clamp(3.5rem, 2rem + 5vw, 7rem);
+  overflow: visible;
+  pointer-events: none;
+}

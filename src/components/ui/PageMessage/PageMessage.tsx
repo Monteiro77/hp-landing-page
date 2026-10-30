@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Horizon } from '../Horizon'
 import styles from './PageMessage.module.scss'
 
 interface PageMessageProps {
@@ -21,19 +22,22 @@ export function PageMessage({
   onAction,
 }: PageMessageProps) {
   return (
-    <section className={styles.message}>
-      <p className={styles.eyebrow}>{eyebrow}</p>
-      <h1 className={styles.title}>{title}</h1>
-      <p className={styles.description}>{description}</p>
-      {actionHref ? (
-        <Link href={actionHref} className={styles.action}>
-          {actionLabel}
-        </Link>
-      ) : (
-        <button type="button" className={styles.action} onClick={onAction}>
-          {actionLabel}
-        </button>
-      )}
+    <section className={styles.band}>
+      <div className={styles.message}>
+        <p className={styles.eyebrow}>{eyebrow}</p>
+        <h1 className={styles.title}>{title}</h1>
+        <p className={styles.description}>{description}</p>
+        {actionHref ? (
+          <Link href={actionHref} className={styles.action}>
+            {actionLabel}
+          </Link>
+        ) : (
+          <button type="button" className={styles.action} onClick={onAction}>
+            {actionLabel}
+          </button>
+        )}
+      </div>
+      <Horizon variant="castle" className={styles.horizon} />
     </section>
   )
 }

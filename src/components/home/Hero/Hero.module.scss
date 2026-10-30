@@ -1,23 +1,8 @@
 @use 'abstracts' as *;
 
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding-top: clamp(3rem, 1.5rem + 6vw, 6.5rem);
-  isolation: isolate;
-
-  // Brilho suave atrás dos retratos.
-  &::after {
-    content: '';
-    position: absolute;
-    top: 5%;
-    right: -10%;
-    z-index: -1;
-    width: min(42rem, 90vw);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--glow), transparent 65%);
-  }
+  @include night-sky(navy);
+  padding: clamp(3rem, 2rem + 5vw, 6rem) 0 clamp(6rem, 4rem + 8vw, 10rem);
 }
 
 .inner {
@@ -27,7 +12,7 @@
   align-items: center;
 
   @include up(lg) {
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-16);
   }
 }
@@ -40,23 +25,17 @@
 
 .eyebrow {
   @include eyebrow;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-
-  svg {
-    color: var(--color-accent);
-  }
 }
 
 .title {
   font-size: var(--text-3xl);
-  letter-spacing: 0.01em;
+  font-weight: 500;
 }
 
 .lead {
-  max-width: 36rem;
+  max-width: 34rem;
   font-size: var(--text-lg);
+  font-weight: 300;
   color: var(--color-text-secondary);
 }
 
@@ -75,79 +54,73 @@
   @include button(ghost);
 }
 
-// Números da coleção como uma linha discreta, não como destaque.
 .facts {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-5);
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
   padding: 0;
   list-style: none;
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
 
   strong {
-    font-weight: 600;
+    font-weight: 800;
     color: var(--color-text);
   }
 }
 
-// Elemento-assinatura: retratos em moldura de arco, como os quadros de Hogwarts.
-.gallery {
+// Destaques no estilo das vitrines do site oficial: retrato com o nome sobre um brilho violeta.
+.picks {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: end;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-  width: 100%;
-  max-width: 30rem;
-  margin-inline: auto;
-  padding-top: var(--space-8);
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  padding: 0;
+  list-style: none;
 }
 
-.frame {
+.pick {
+  position: relative;
+  display: block;
   overflow: hidden;
-  border-radius: 999px 999px var(--radius-md) var(--radius-md);
-  box-shadow:
-    0 0 0 1px var(--color-border-strong),
-    0 0 0 5px var(--color-bg),
-    0 0 0 6px color-mix(in srgb, var(--color-accent) 35%, transparent),
-    0 24px 50px -20px var(--house-primary);
-  // Único momento animado da página: os quadros aparecem uma vez, ao carregar.
-  animation: frame-in 600ms var(--ease-out) both;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration) var(--ease-out);
 
-  &:nth-child(1) {
-    animation-delay: 80ms;
+  // Brilho violeta na base, onde fica o nome.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 45% 0 0;
+    background:
+      radial-gradient(120% 70% at 50% 100%, rgb(110 80 230 / 0.85), transparent 70%),
+      linear-gradient(transparent, rgb(30 20 80 / 0.9));
+    pointer-events: none;
   }
 
-  &:nth-child(2) {
-    z-index: 1;
-    scale: 1.1;
-    translate: 0 -1.75rem;
-  }
-
-  &:nth-child(3) {
-    animation-delay: 160ms;
-  }
-
-  // Com "reduzir movimento", troca o deslocamento por um simples fade.
-  @include reduced-motion {
-    animation-name: frame-fade;
+  @include hover {
+    box-shadow:
+      var(--shadow-card),
+      0 0 0 2px var(--color-accent);
   }
 }
 
-@keyframes frame-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
+.pickPortrait {
+  aspect-ratio: 3 / 4.2;
 }
 
-@keyframes frame-fade {
-  from {
-    opacity: 0;
-  }
+.pickName {
+  position: absolute;
+  inset: auto var(--space-2) var(--space-3);
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  text-align: center;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 0.6);
 }
 
-.portrait {
-  aspect-ratio: 3 / 4;
+.horizon {
+  color: sky-top(stone);
 }

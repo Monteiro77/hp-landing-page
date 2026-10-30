@@ -12,6 +12,7 @@ const STROKE_ICONS = {
   arrowLeft: <path d="M19 12H5m6-6-6 6 6 6" />,
   arrowRight: <path d="M5 12h14m-6-6 6 6-6 6" />,
   chevronDown: <path d="m6 9 6 6 6-6" />,
+  chevronRight: <path d="m9 6 6 6-6 6" />,
   refresh: <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4.5h-4.5" />,
 } satisfies Record<string, ReactNode>
 

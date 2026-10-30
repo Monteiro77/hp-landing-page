@@ -1,46 +1,42 @@
 @use 'sass:map';
 @use 'abstracts' as *;
 
-// Cores semânticas: os componentes usam o papel da cor (texto, superfície, acento), nunca o
-// valor. O tema acompanha a preferência do sistema, sem um seletor próprio no site.
-// Contraste (WCAG) de cada par está anotado ao lado.
+// Visual inspirado no site oficial do mundo bruxo: noite azul-violeta, títulos serifados e
+// ações em pílula violeta. Os componentes usam o papel da cor, nunca o valor.
+// Contraste (WCAG) anotado ao lado de cada cor de texto.
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  // Tema claro
-  --color-bg: #f4f2ed;
-  --color-bg-elevated: #fbfaf7;
-  --color-surface: #ffffff;
-  --color-fill: rgb(27 29 38 / 0.05);
-  --color-fill-hover: rgb(27 29 38 / 0.09);
-  --color-border: rgb(27 29 38 / 0.12);
-  --color-border-strong: rgb(27 29 38 / 0.28);
-  --color-text: #1b1d26; // 16.8:1 na superfície
-  --color-text-secondary: #5a5d68; // 6.6:1 na superfície, 5.9:1 no fundo
-  --color-text-tertiary: #6b6e7a; // 5.1:1 na superfície
-  --color-accent: #7d5a14; // links e foco: 6.3:1 na superfície
-  --color-accent-fill: #e2bd72; // botão principal
-  --color-on-accent: #1d1606; // 10:1 sobre o botão principal
-  --color-header: rgb(244 242 237 / 0.82);
-  --shadow-card: 0 1px 2px rgb(27 29 38 / 0.06), 0 14px 32px -18px rgb(27 29 38 / 0.22);
-  --glow: rgb(226 189 114 / 0.22);
-  --image-filter: none;
-  --house-wash: 16%;
+  // Cores
+  --color-bg: #10141b;
+  --color-chrome: #00001b; // header e rodapé
+  --color-surface: #0b163b; // pílulas e corpo dos cards
+  --color-panel: rgb(11 22 59 / 0.75); // painéis sobre o céu
+  --color-border: rgb(255 255 255 / 0.14);
+  --color-border-strong: rgb(255 255 255 / 0.32);
+  --color-frame: rgb(255 255 255 / 0.55);
+  --color-text: #ffffff; // 17.6:1 no azul-marinho
+  --color-text-secondary: rgb(255 255 255 / 0.72); // 5.5:1 no ponto mais claro das faixas
+  --color-text-tertiary: rgb(255 255 255 / 0.6); // 6.9:1 nos cards
+  --color-accent: #5758ff; // ações e bordas de controles
+  --color-accent-hover: #4445e8;
+  --color-on-accent: #ffffff; // 4.95:1 sobre o violeta
+  --color-focus: #9a9bff; // >= 3.5:1 em todas as faixas
+  --color-gold: #e2bd72; // marca
+  --shadow-card: 0 18px 40px -20px rgb(0 0 0 / 0.8);
+  --image-filter: brightness(0.94);
 
-  // Tipografia: Cinzel (marca) só em títulos; textos e controles usam a fonte do sistema,
-  // feita para legibilidade em tamanhos pequenos.
-  --font-display: var(--font-cinzel), 'Times New Roman', serif;
-  --font-body:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
-  --text-2xs: 0.75rem; // 12px: menor tamanho usado (rótulos)
+  // Tipografia: serifada nos títulos e nomes, sans geométrica no restante.
+  --font-display: var(--font-crimson), 'Times New Roman', serif;
+  --font-body: var(--font-mulish), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-2xs: 0.75rem; // 12px: menor tamanho usado
   --text-xs: 0.8125rem;
   --text-sm: 0.9375rem;
-  --text-base: 1.0625rem; // 17px, tamanho padrão de corpo de texto
+  --text-base: 1.0625rem;
   --text-lg: 1.1875rem;
-  --text-xl: 1.375rem;
-  --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-  --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 4rem);
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+  --text-3xl: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
 
   // Espaçamento (escala de 4px)
   --space-1: 0.25rem;
@@ -59,54 +55,25 @@
   // Layout
   --container-max: 76rem;
   --gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
-  --header-height: 4rem;
   --control-height: 2.75rem; // 44px: alvo de toque recomendado
 
   // Formas e movimento
   --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1.25rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
   --radius-pill: 999px;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration: 200ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #090b13;
-    --color-bg-elevated: #0f121e;
-    --color-surface: #151a2a;
-    --color-fill: rgb(255 255 255 / 0.05);
-    --color-fill-hover: rgb(255 255 255 / 0.09);
-    --color-border: rgb(232 199 126 / 0.14);
-    --color-border-strong: rgb(232 199 126 / 0.34);
-    --color-text: #efe9db; // 14.3:1 na superfície
-    --color-text-secondary: #b3aea1; // 7.8:1 na superfície
-    --color-text-tertiary: #8e8a80; // 5:1 na superfície
-    --color-accent: #e2bd72; // 11:1 no fundo
-    --color-header: rgb(9 11 19 / 0.78);
-    --shadow-card: 0 18px 40px -20px rgb(0 0 0 / 0.75);
-    --glow: rgb(226 189 114 / 0.12);
-    // Escurece levemente fotos com fundo claro para não "brilharem" no tema escuro.
-    --image-filter: brightness(0.92);
-    --house-wash: 55%;
-  }
-}
-
 // Aumentar contraste (preferência do sistema): bordas e textos secundários mais fortes.
 @media (prefers-contrast: more) {
   :root {
-    --color-border: color-mix(in srgb, var(--color-text) 40%, transparent);
-    --color-border-strong: var(--color-text);
-    --color-text-secondary: var(--color-text);
-    --color-text-tertiary: var(--color-text);
-  }
-}
-
-// Reduzir transparência: o header deixa de ser translúcido.
-@media (prefers-reduced-transparency: reduce) {
-  :root {
-    --color-header: var(--color-bg);
+    --color-border: rgb(255 255 255 / 0.5);
+    --color-border-strong: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-text-tertiary: #ffffff;
+    --color-panel: #0b163b;
   }
 }
 
@@ -115,27 +82,14 @@
 [data-house] {
   --house-primary: #{map.get($houses, none, primary)};
   --house-accent: #{map.get($houses, none, accent)};
-  --house-ink: #{map.get($houses, none, ink-light)};
+  --house-ink: #{map.get($houses, none, ink)};
 }
 
 @each $house, $colors in $houses {
   [data-house='#{$house}'] {
     --house-primary: #{map.get($colors, primary)};
     --house-accent: #{map.get($colors, accent)};
-    --house-ink: #{map.get($colors, ink-light)};
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root,
-  [data-house] {
-    --house-ink: #{map.get($houses, none, ink-dark)};
-  }
-
-  @each $house, $colors in $houses {
-    [data-house='#{$house}'] {
-      --house-ink: #{map.get($colors, ink-dark)};
-    }
+    --house-ink: #{map.get($colors, ink)};
   }
 }
 
@@ -154,8 +108,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
-  // Compensa o header fixo ao navegar por âncoras.
-  scroll-padding-top: calc(var(--header-height) + var(--space-4));
+  scroll-padding-top: var(--space-4);
 
   @include reduced-motion {
     scroll-behavior: auto;
@@ -168,11 +121,11 @@ body {
   flex-direction: column;
   font-family: var(--font-body);
   font-size: var(--text-base);
+  font-weight: 400;
   line-height: 1.55;
   color: var(--color-text);
-  background:
-    radial-gradient(ellipse 70% 40% at 50% -5%, var(--glow), transparent 70%) no-repeat,
-    var(--color-bg);
+  // Mesma cor do rodapé: em páginas curtas, o espaço que sobra emenda com a silhueta final.
+  background: var(--color-chrome);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -185,14 +138,10 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 700;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-h1,
-h2 {
   font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  text-wrap: balance;
 }
 
 p {
@@ -226,8 +175,8 @@ button {
 }
 
 ::selection {
-  background: rgb(226 189 114 / 0.35);
-  color: var(--color-text);
+  background: rgb(87 88 255 / 0.55);
+  color: #ffffff;
 }
 
 .skip-link {
@@ -236,10 +185,10 @@ button {
   left: var(--space-3);
   z-index: 100;
   padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-sm);
-  background: var(--color-accent-fill);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
   color: var(--color-on-accent);
-  font-weight: 600;
+  font-weight: 800;
   transform: translateY(-200%);
 
   &:focus-visible {

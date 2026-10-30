@@ -1,35 +1,65 @@
 @use 'abstracts' as *;
 
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: var(--header-height);
-  border-bottom: 1px solid var(--color-border);
-  // Material translúcido apenas na camada de navegação, nunca no conteúdo.
-  background: var(--color-header);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: var(--color-chrome);
+}
 
-  @media (prefers-reduced-transparency: reduce) {
-    backdrop-filter: none;
+// Linha principal: navegação | marca centralizada | ação
+.top {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 4.5rem;
+  border-bottom: 1px solid #333349;
+
+  @include down(md) {
+    grid-template-columns: 1fr auto;
+    min-height: 4rem;
   }
 }
 
-.inner {
-  @include container;
-  height: 100%;
+.nav {
+  @include down(md) {
+    display: none;
+  }
+}
+
+.navList {
   display: flex;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  min-height: var(--control-height);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  @include hover {
+    color: var(--color-focus);
+  }
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-accent);
+  justify-self: center;
+  color: var(--color-gold);
   border-radius: var(--radius-sm);
+
+  @include down(md) {
+    justify-self: start;
+  }
 }
 
 .logo {
@@ -40,58 +70,86 @@
 
 .brandName {
   font-family: var(--font-display);
-  font-size: var(--text-base);
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  font-style: italic;
+  letter-spacing: 0.01em;
   white-space: nowrap;
-  color: var(--color-text);
 
-  @include up(sm) {
-    font-size: var(--text-lg);
+  @include up(md) {
+    font-size: 1.75rem;
   }
 }
 
-.nav {
+// Botão em pílula com contorno, como o "Log in" do site oficial.
+.github {
+  @include button(ghost);
+  justify-self: end;
+  min-width: var(--control-height);
+  padding-inline: var(--space-4);
+
+  @include down(sm) {
+    padding-inline: 0;
+  }
+}
+
+.githubLabel {
+  @include down(sm) {
+    @include visually-hidden;
+  }
+}
+
+// Linha de pílulas das casas
+.houses {
+  border-bottom: 1px solid #333349;
+  background: var(--color-bg);
+}
+
+.houseList {
+  @include container;
   display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  padding: 0;
+  justify-content: center;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
   list-style: none;
 
-  @include up(sm) {
-    gap: var(--space-2);
+  @include down(md) {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
-// Em telas estreitas os atalhos de âncora saem para o nome do site caber em uma linha.
-.anchorItem {
-  @include down(sm) {
-    display: none;
-  }
-}
-
-.navLink,
-.iconLink {
+.housePill {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   min-height: var(--control-height);
-  padding-inline: var(--space-3);
+  padding: 0 var(--space-3) 0 var(--space-2);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
-  font-size: var(--text-sm);
+  background: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
   font-weight: 500;
-  color: var(--color-text-secondary);
-  transition:
-    color var(--duration) var(--ease-out),
-    background-color var(--duration) var(--ease-out);
+  white-space: nowrap;
+  transition: border-color var(--duration) var(--ease-out);
 
   @include hover {
-    color: var(--color-text);
-    background: var(--color-fill-hover);
+    border-color: var(--color-accent);
   }
 }
 
-.iconLink {
-  justify-content: center;
-  min-width: var(--control-height);
-  padding-inline: 0;
+.houseList > li {
+  flex-shrink: 0;
+}
+
+.pennant {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: auto;
 }

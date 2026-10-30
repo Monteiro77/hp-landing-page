@@ -1,8 +1,12 @@
 @use 'abstracts' as *;
 
 .page {
+  @include night-sky(navy);
+  padding: var(--space-8) 0 clamp(6rem, 4rem + 8vw, 10rem);
+}
+
+.inner {
   @include container;
-  padding-top: var(--space-8);
 }
 
 .back {
@@ -11,28 +15,28 @@
   gap: var(--space-2);
   min-height: var(--control-height);
   margin-bottom: var(--space-8);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   border-radius: var(--radius-sm);
 
   @include hover {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+    color: var(--color-focus);
   }
 }
 
 .related {
   display: grid;
-  gap: var(--space-6);
   margin-top: var(--section-spacing);
 }
 
-.relatedTitle {
-  font-size: var(--text-2xl);
+.relatedLink {
+  @include button(primary);
+  justify-self: center;
+  margin-top: var(--space-10);
 }
 
-.relatedLink {
-  @include button(ghost);
-  justify-self: center;
+.horizon {
+  color: var(--color-chrome);
 }

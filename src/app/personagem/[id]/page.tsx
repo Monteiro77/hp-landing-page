@@ -7,7 +7,9 @@ import {
   CharacterProfile,
   CharacterProfileSkeleton,
 } from '@/components/characters/CharacterProfile'
+import { Horizon } from '@/components/ui/Horizon'
 import { Icon } from '@/components/ui/Icon'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { PATRONUS_LABELS } from '@/constants/labels'
 import { formatHouse, formatStatus, translate } from '@/lib/characters/format'
 import { getCharacterById, getCharacters } from '@/lib/hp-api/client'
@@ -78,9 +80,10 @@ async function CharacterDetails({ params }: Pick<PageProps<'/personagem/[id]'>, 
 
       {related.length > 0 && character.house && (
         <section className={styles.related} aria-labelledby="related-title">
-          <h2 id="related-title" className={styles.relatedTitle}>
-            Outros membros da {formatHouse(character.house)}
-          </h2>
+          <SectionHeading
+            id="related-title"
+            title={`Outros membros da ${formatHouse(character.house)}`}
+          />
           <CharacterGrid characters={related} />
           <Link href={`/?house=${character.house}#personagens`} className={styles.relatedLink}>
             Ver todos da {formatHouse(character.house)}
@@ -99,14 +102,17 @@ async function CharacterDetails({ params }: Pick<PageProps<'/personagem/[id]'>, 
 export default function CharacterPage({ params }: PageProps<'/personagem/[id]'>) {
   return (
     <div className={styles.page}>
-      <Link href="/#personagens" className={styles.back}>
-        <Icon name="arrowLeft" size={18} />
-        Todos os personagens
-      </Link>
+      <div className={styles.inner}>
+        <Link href="/#personagens" className={styles.back}>
+          <Icon name="arrowLeft" size={18} />
+          Todos os personagens
+        </Link>
 
-      <Suspense fallback={<CharacterProfileSkeleton />}>
-        <CharacterDetails params={params} />
-      </Suspense>
+        <Suspense fallback={<CharacterProfileSkeleton />}>
+          <CharacterDetails params={params} />
+        </Suspense>
+      </div>
+      <Horizon variant="hills" className={styles.horizon} />
     </div>
   )
 }

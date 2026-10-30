@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HousePennant } from '@/components/houses/HousePennant'
 import { PATRONUS_LABELS } from '@/constants/labels'
 import { formatBirthDate, translate } from '@/lib/characters/format'
 import type { CharacterSummary } from '@/types/character'
@@ -8,8 +9,7 @@ import { StatusBadge } from '../StatusBadge'
 import styles from './CharacterCard.module.scss'
 
 // Deve acompanhar as colunas definidas em CharacterGrid.module.scss.
-const PORTRAIT_SIZES =
-  '(min-width: 1024px) 300px, (min-width: 768px) 33vw, (min-width: 480px) 50vw, 120px'
+const PORTRAIT_SIZES = '(min-width: 1024px) 300px, (min-width: 768px) 33vw, 50vw'
 
 interface CharacterCardProps {
   character: CharacterSummary
@@ -34,16 +34,17 @@ export function CharacterCard({ character, headingLevel: Heading = 'h3' }: Chara
           className={styles.portrait}
         />
         <StatusBadge alive={alive} gender={gender} className={styles.status} />
-      </div>
-
-      <div className={styles.body}>
-        <HouseTag house={house} />
+        {house && <HousePennant house={house} className={styles.pennant} />}
         <Heading className={styles.name}>
           {/* O link "esticado" (::after) torna o card inteiro clicável, mantendo um único foco. */}
           <Link href={`/personagem/${id}`} className={styles.link}>
             {name}
           </Link>
         </Heading>
+      </div>
+
+      <div className={styles.body}>
+        <HouseTag house={house} />
 
         <dl className={styles.details}>
           <div className={styles.detail}>

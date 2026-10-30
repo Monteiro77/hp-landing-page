@@ -2,18 +2,18 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
   padding: 0;
   list-style: none;
 
   @include up(sm) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5);
+    gap: var(--space-4);
   }
 
   @include up(md) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
   }
 
   @include up(lg) {
@@ -33,9 +33,9 @@
 %shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-fill) 0%,
-    var(--color-fill-hover) 50%,
-    var(--color-fill) 100%
+    rgb(255 255 255 / 0.05) 0%,
+    rgb(255 255 255 / 0.1) 50%,
+    rgb(255 255 255 / 0.05) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
@@ -46,29 +46,21 @@
 }
 
 .skeletonCard {
-  @include surface;
   display: grid;
-  grid-template-columns: 7.5rem 1fr;
   overflow: hidden;
-
-  @include up(sm) {
-    grid-template-columns: 1fr;
-  }
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
 }
 
 .skeletonMedia {
   @extend %shimmer;
-  min-height: 9.5rem;
-
-  @include up(sm) {
-    aspect-ratio: 4 / 5;
-  }
+  aspect-ratio: 3 / 4;
 }
 
 .skeletonBody {
   display: grid;
   gap: var(--space-3);
-  padding: var(--space-5);
+  padding: var(--space-4);
 }
 
 .skeletonLine {

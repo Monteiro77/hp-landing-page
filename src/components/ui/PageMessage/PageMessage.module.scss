@@ -1,12 +1,19 @@
 @use 'abstracts' as *;
 
+.band {
+  @include night-sky(violet);
+  padding: var(--section-spacing) var(--gutter) clamp(7rem, 5rem + 8vw, 11rem);
+}
+
 .message {
-  @include container;
+  @include ornate-frame;
   display: grid;
   justify-items: center;
   gap: var(--space-4);
   max-width: 40rem;
-  padding-top: var(--section-spacing);
+  margin-inline: auto;
+  padding: var(--space-12) var(--space-6);
+  background: rgb(0 0 27 / 0.6);
   text-align: center;
 }
 
@@ -16,14 +23,20 @@
 
 .title {
   font-size: var(--text-2xl);
+  font-weight: 500;
 }
 
 .description {
   font-size: var(--text-lg);
+  font-weight: 300;
   color: var(--color-text-secondary);
 }
 
 .action {
   @include button(primary);
   margin-top: var(--space-4);
+}
+
+.horizon {
+  color: var(--color-chrome);
 }

@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from 'next'
-import { Cinzel } from 'next/font/google'
+import { Crimson_Pro, Mulish } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { SITE } from '@/constants/site'
 import '@/styles/globals.scss'
 
-// Fonte da marca usada só em títulos; o restante usa a fonte do sistema (sem download extra).
-const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel', display: 'swap' })
+// Fontes livres no espírito do site oficial: serifada clássica nos títulos e sans geométrica
+// no texto. O next/font hospeda os arquivos junto com o site (sem requisição ao Google).
+const crimson = Crimson_Pro({ subsets: ['latin'], variable: '--font-crimson', display: 'swap' })
+const mulish = Mulish({ subsets: ['latin'], variable: '--font-mulish', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -25,16 +27,13 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f4f2ed' },
-    { media: '(prefers-color-scheme: dark)', color: '#090b13' },
-  ],
-  colorScheme: 'light dark',
+  themeColor: '#00001b',
+  colorScheme: 'dark',
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="pt-BR" className={cinzel.variable}>
+    <html lang="pt-BR" className={`${crimson.variable} ${mulish.variable}`}>
       <body>
         <a href="#conteudo" className="skip-link">
           Pular para o conteúdo
