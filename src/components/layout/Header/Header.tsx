@@ -29,7 +29,6 @@ export function Header() {
 
         <Link href="/" className={styles.brand}>
           <LogoMark className={styles.logo} />
-          <span className={styles.brandName}>{SITE.name}</span>
         </Link>
 
         <a
