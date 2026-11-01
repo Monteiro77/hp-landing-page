@@ -2,7 +2,7 @@
 
 Landing page com os personagens do universo Harry Potter, consumindo a [HP-API](https://hp-api.onrender.com). Desenvolvida como teste técnico.
 
-**Aplicação publicada:** _link da Vercel após o deploy_
+**Aplicação publicada:**[Almanaque Bruxo](https://hp.viniciusmont.com.br/)
 
 ## Funcionalidades
 
